@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+
+    <body>
+    <h1>Here are all your albums</h1>
+    {% if all_albums %}
+        <ul>
+            {% for album in all_albums %}
+                <li><a href ="{% url 'music:detail' album.id %}">{{ album.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h4>Sorry, No albums are available</h4>
+    {% endif %}
+    </body>
+</html>
