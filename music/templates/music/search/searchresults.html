@@ -1,0 +1,177 @@
+{% extends 'music/base/base.html' %}
+{% block title %}Search Results{% endblock %}
+{% block body %}
+
+    <!-- Dynamic Content -->
+    <div class="container-fluid songs-container">
+
+        <!-- Selection Header Panel -->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Selection Header -->
+                <ul class="nav nav-pills" style="margin-bottom: 10px;">
+
+                    <!-- Show All -->
+                    <li role="presentation" {% if filter_by == 'all' %}class="active"{% endif %}><a
+                            href="{% url 'music:songs' 'all' %}">View All</a></li>
+
+                    <!-- Show Favourites -->
+                    <li role="presentation" {% if filter_by == 'favorites' %}class="active"{% endif %}><a
+                            href="{% url 'music:songs' 'favorites' %}">Favorites</a></li>
+
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+
+                    <!-- Panel Body -->
+                    <div class="panel-body">
+
+                        <!-- Song Table-->
+                        <h3>Song Results</h3>
+                        <table class="table">
+
+                            <!-- Table Head -->
+                            <thead>
+                            <tr>
+                                <th>Song Title</th>
+                                <th>Artist</th>
+                                <th>Playa</th>
+                                <th>Album</th>
+                                <th>Favorite</th>
+                            </tr>
+                            </thead>
+
+                            <!-- Table Body -->
+                            <tbody>
+                            {% for song in songs %}
+                                <tr>
+
+                                    <!-- Song Title -->
+                                    <td>
+                                        <a href="{% url 'music:song_detail' song.id %}" role="button">{{ song.title }}</a>
+                                    </td>
+
+                                    <!-- Artist -->
+                                    <td>
+                                        <a href="{% url 'music:artist_detail' song.artist.id %}" role="button">{{ song.artist }}</a>
+                                    </td>
+
+                                    <!-- Playa -->
+                                    <td>
+                                        <a target="_blank" href="">
+                                            <button type="button" class="btn btn-success btn-xs">
+                                                <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                            </button>
+                                        </a>
+                                    </td>
+
+                                    <!-- Album -->
+                                    <td>
+                                        <a href="{% url 'music:album_detail' song.album.id %}">{{ song.album.title }}</a>
+                                    </td>
+
+                                    <!-- Favorite -->
+                                    <td>
+                                        <a href="{% url 'music:fav_song' song.id %}" class="btn-favorite"><span
+                                                class="glyphicon glyphicon-star {% if song.fav %}active{% endif %}"></span></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+
+                        <!-- Artist Table -->
+                        <h3>Artist Results</h3>
+                        <table class="table">
+
+                            <!-- Table Head -->
+                            <thead>
+                            <tr>
+                                <th>Artist</th>
+                                <th>Favorite</th>
+                            </tr>
+                            </thead>
+
+                            <!-- Table Body -->
+                            <tbody>
+                            {% for artist in artists %}
+                                <tr>
+
+                                    <!-- Artist -->
+                                    <td>
+                                        <a href="{% url 'music:artist_detail' artist.id %}" role="button">{{ artist.name }}</a>
+                                    </td>
+
+                                    <!-- Favorite -->
+                                    <td>
+                                        <a href="{% url 'music:fav_artist' artist.id %}" class="btn-favorite">
+                                            <span class="glyphicon glyphicon-star {% if artist.fav %}active{% endif %}">
+                                            </span>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+
+                        <!-- Album Table -->
+                        <h3>Album Results</h3>
+                        <table class="table">
+
+                            <!-- Table Head -->
+                            <thead>
+                            <tr>
+                                <th>Album</th>
+                                <th>Artist</th>
+                                <th>Favorite</th>
+                            </tr>
+                            </thead>
+
+                            <!-- Table Body -->
+                            <tbody>
+                            {% for album in albums %}
+                                <tr>
+
+                                    <!-- Album -->
+                                    <td>
+                                        <a href="{% url 'music:album_detail' album.id %}">{{ album.title }}</a>
+                                    </td>
+
+                                    <!-- Artist -->
+                                    <td>
+                                        <a href="{% url 'music:artist_detail' album.artist.id %}" role="button">{{ album.artist.name }}</a>
+                                    </td>
+
+                                    <!-- Favorite -->
+                                    <td>
+                                        <a href="{% url 'music:fav_album' album.id %}" class="btn-favorite">
+                                            <span class="glyphicon glyphicon-star {% if album.fav %}active{% endif %}">
+                                            </span>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
