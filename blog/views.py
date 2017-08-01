@@ -12,7 +12,7 @@ def vote(request, question_id):
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
-        return render(request, 'blog/detail.html', {
+        return render(request, 'blog/answer.html', {
             'question': question,
             'error_message': "You didn't select a choice.",
         })
@@ -39,7 +39,7 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = Question
-    template_name = 'blog/detail.html'
+    template_name = 'blog/answer.html'
 
     def get_queryset(self):
         """

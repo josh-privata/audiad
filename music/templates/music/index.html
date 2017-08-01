@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
+{% extends 'music/base/base.html' %}
+{% block title %}{{ album }}{% endblock %}
+{% block index_active %}active{% endblock %}
+{% block body %}
 
-    <body>
-    <h1>Here are all your albums</h1>
-    {% if all_albums %}
-        <ul>
-            {% for album in all_albums %}
-                <li><a href ="{% url 'music:detail' album.id %}">{{ album.title }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h4>Sorry, No albums are available</h4>
-    {% endif %}
-    </body>
-</html>
+    <!-- Dynamic Content -->
+    <div class="albums-container container-fluid">
+
+        <!-- Main Body -->
+        <div class="row">
+            <div class="col-sm-12 title-brand">
+                <h1>Music Manager</h1>
+                <h2>Welcome {{ user.username.title }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
