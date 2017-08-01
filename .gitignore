@@ -1,5 +1,5 @@
 .gitignore
-.idea
+.idea/
 .idea/*
 mydatabase
 media/
