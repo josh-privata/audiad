@@ -1,5 +1,11 @@
-.gitignore
-.idea/
-.idea/*
-mydatabase
-media/
+
+/.idea/
+/mydatabase
+/media/
+/music/__init__.pyc
+/music/__pycache__/
+/music/admin.pyc
+/music/apps.pyc
+/music/migrations/__pycache__/
+/music/models.pyc
+/.gitignore
