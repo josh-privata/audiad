@@ -1,4 +1,4 @@
-django-taggit
+django-taggit==0.22.1
 mutagen
 Django==1.11.3
 django_tables2
