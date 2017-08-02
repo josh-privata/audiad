@@ -1,6 +1,6 @@
 language: python
 pip:
-- taggit
+- django-taggit
 - mutagen
 - Django==1.11.3
 - django_tables2
