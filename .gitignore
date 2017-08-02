@@ -9,3 +9,5 @@
 /music/migrations/__pycache__/
 /music/models.pyc
 /.gitignore
+blog/__pycache__/
+blog/migrations/__pycache__/

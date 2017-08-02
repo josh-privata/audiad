@@ -152,7 +152,7 @@
                                     <td>
 
                                         <!-- Delete -->
-                                        <form action="{% url 'music:delete_song' album.id song.id %}" method="post"
+                                        <form action="{% url 'music:delete_song' song.id %}" method="post"
                                               style="display: inline;">
                                             {% csrf_token %}
                                             <input type="hidden" name="song_id" value="{{ song.id }}"/>

@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 
-from . import views
+from .views import views
 
 app_name = 'music'
 urlpatterns = [
@@ -13,8 +13,11 @@ urlpatterns = [
     # /music/albums/<all:favourites>
     url(r'^albums/(?P<filter_by>[a-zA_Z]+)/$', views.albums, name='albums'),
 
+  # /music/songs/<all:favourites>
+  url(r'^songs/(?P<filter_by>[a-zA_Z]+)/$', views.songs, name='songs'),
+
     # /music/songs/<all:favourites>
-    url(r'^songs/(?P<filter_by>[a-zA_Z]+)/$', views.songs, name='songs'),
+    url(r'^songs/(?P<filter_by>[a-zA_Z]+)/table$', views.songstable, name='songstable'),
 
     # /music/artists/<all:favourites>
     url(r'^artists/(?P<filter_by>[a-zA_Z]+)/$', views.artists, name='artists'),
@@ -61,11 +64,14 @@ urlpatterns = [
     # /music/<album_id>/create_song
     url(r'^(?P<album_id>[0-9]+)/create_song/$', views.create_song, name='create_song'),
 
-    # /music/<album_id>/delete_song
-    url(r'^(?P<album_id>[0-9]+)/delete_song/(?P<song_id>[0-9]+)/$', views.delete_song, name='delete_song'),
+    # /music/<song_id>/delete_song
+    url(r'^(?P<song_id>[0-9]+)/delete_song//$', views.delete_song, name='delete_song'),
 
     # /music/<album_id>/delete_album
     url(r'^(?P<album_id>[0-9]+)/delete_album/$', views.delete_album, name='delete_album'),
+
+    # /music/<album_id>/delete_artist
+    url(r'^(?P<album_id>[0-9]+)/delete_artist/$', views.delete_artist, name='delete_artist'),
 
     url(r'^register/$', views.register, name='register'),
 

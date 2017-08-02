@@ -1,0 +1,52 @@
+{% extends 'music/base/base.html' %}
+{% block title %}All Songs{% endblock %}
+{% block songs_active %}active{% endblock %}
+{% load render_table from django_tables2 %}
+
+{% block body %}
+
+    <!-- Dynamic Content -->
+    <div class="container-fluid songs-container">
+
+        {% comment %}<!-- Selection Header Panel -->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Selection Header -->
+                <ul class="nav nav-pills" style="margin-bottom: 10px;">
+
+                    <!-- Show All -->
+                    <li role="presentation" {% if filter_by == 'all' %}class="active"{% endif %}><a
+                            href="{% url 'music:songs' 'all' %}">View All</a></li>
+
+                    <!-- Show Favourites -->
+                    <li role="presentation" {% if filter_by == 'favorites' %}class="active"{% endif %}><a
+                            href="{% url 'music:songs' 'favorites' %}">Favorites</a></li>
+
+                </ul>
+
+            </div>
+        </div>{% endcomment %}
+
+        <!-- Right Panel -->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Panel -->
+                <div class="panel panel-default">
+
+                    <!-- Panel Body -->
+                    <div class="panel-body">
+
+                        {% render_table table %}
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

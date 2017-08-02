@@ -58,6 +58,28 @@
                             {% endfor %}
                         </h4>
 
+                    <!-- Delete -->
+                        <form action="{% url 'music:delete_artist' artist.id %}" method="post"
+                              style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="artist" value="{{ artist.id }}"/>
+                                <button type="submit" class="btn btn-danger btn-xs"/>
+                                    <span class="glyphicon glyphicon-remove"></span> Delete
+                                </button>
+                            </input>
+                        </form>
+
+                        <!-- Edit -->
+                        <form action="{% url 'music:edit_artist' artist.id %}" method="post"
+                              style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="artist_id" value="{{ artist.id }}"/>
+                                <button type="submit" class="btn btn-information btn-xs"/>
+                                    <span class="glyphicon glyphicon-edit"></span> Edit
+                                </button>
+                            </input>
+                        </form>
+
                     </div>
 
                 </div>

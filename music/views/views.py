@@ -3,11 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.core.checks import messages
 from django.db import transaction
 from django.db.models import Q
-from .forms import AlbumForm, ArtistForm, GenreForm, SongForm2, SongForm1, UserForm
-from .models import Album, Song, Artist
+from django_tables2 import RequestConfig
+
+from music.forms import AlbumForm, ArtistForm, GenreForm, SongForm2, SongForm1, UserForm
+from music.models import Album, Song, Artist
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from .bin import *
+from music.tables import *
+from music.bin import *
 from django.shortcuts import get_object_or_404, render, redirect
 
 AUDIO_FILE_TYPES = ['wav', 'mp3', 'ogg']
@@ -98,6 +101,12 @@ def delete_album(request, album_id):
     albums()
 
 
+def delete_artist(request, artist_id):
+    artist = get_object_or_404(Artist, pk=artist_id)
+    artist.delete()
+    artist()
+
+
 def delete_song(request, song_id):
     song = Song.objects.get(pk=song_id)
     song.delete()
@@ -157,12 +166,31 @@ def songs(request, filter_by):
     })
 
 
+def songstable(request, filter_by):
+    table = SongTable(Song.objects.all())
+    if filter_by == 'favorites':
+        table = table.filter(fav=True)
+    RequestConfig(request).configure(table)
+    return render(request, 'music/song/songs2.html', {'table': table})
+
+
+
 def index(request):
     if not request.user.is_authenticated():
         return render(request, 'music/auth/login.html')
     else:
+        user_songs = Song.objects.filter(fav=True)
+        user_artists = Artist.objects.filter(fav=True)
         user_albums = Album.objects.filter(user=request.user, fav=True)
-        return render(request, 'music/index.html', {'albums': user_albums})
+        albums_count = Album.objects.filter(user=request.user).count()
+        artists_count = Artist.objects.all().count()
+        songs_count = Song.objects.all().count()
+        return render(request, 'music/index.html', {'artists_count': artists_count,
+                                                    'user_albums': user_albums,
+                                                    'user_songs': user_songs,
+                                                    "user_artists": user_artists,
+                                                    'songs_count': songs_count,
+                                                    'albums_count': albums_count})
 
 
 def albums(request, filter_by):
@@ -230,9 +258,9 @@ def album_detail(request, album_id):
         genre = ""
         if album.genre.name:
             genre = album.genre.name
-        similar_artist = artists.filter(Q(genre__name__icontains=genre)).distinct().exclude(name=album.artist)
-        similar_album = albums.filter(Q(genre__name__icontains=genre)).distinct().exclude(title=album.title)
-        similar_song = songss.filter(Q(genre__name__icontains=genre)).distinct().exclude(album=album.id)
+        similar_artist = artists.filter(Q(genre__name__icontains=genre)).distinct().exclude(name=album.artist)[:5]
+        similar_album = albums.filter(Q(genre__name__icontains=genre)).distinct().exclude(title=album.title)[:5]
+        similar_song = songss.filter(Q(genre__name__icontains=genre)).distinct().exclude(album=album.id)[:5]
         return render(request, 'music/album/album_detail.html', {'album': album,
                                                                  'user': user,
                                                                  'similar_artist': similar_artist,
@@ -252,9 +280,9 @@ def artist_detail(request, artist_id):
         genre = ""
         if artist.genre.name:
             genre = artist.genre.name
-        similar_artist = artists.filter(Q(genre__name__icontains=genre)).distinct().exclude(name=artist.name)
-        similar_album = albums.filter(Q(genre__name__icontains=genre)).distinct()
-        similar_song = songss.filter(Q(genre__name__icontains=genre)).distinct()
+        similar_artist = artists.filter(Q(genre__name__icontains=genre)).distinct().exclude(name=artist.name)[:5]
+        similar_album = albums.filter(Q(genre__name__icontains=genre)).distinct().exclude(artist=artist.id)[:5]
+        similar_song = songss.filter(Q(genre__name__icontains=genre)).distinct().exclude(artist=artist.id).distinct()[:5]
         return render(request, 'music/artist/artist_detail.html', {'artist': artist,
                                                                    'user': user,
                                                                    'similar_artist': similar_artist,
@@ -275,9 +303,9 @@ def song_detail(request, song_id):
         genre = ""
         if song.genre.name:
             genre = song.genre.name
-        similar_artist = artists.filter(Q(genre__name__icontains=genre)).distinct().exclude(name=album.artist)
-        similar_album = all_albums.filter(Q(genre__name__icontains=genre)).distinct().exclude(title=album.title)
-        similar_song = songss.filter(Q(genre__name__icontains=genre)).distinct().exclude(album=album.id)
+        similar_artist = artists.filter(Q(genre__name__icontains=genre)).distinct().exclude(name=album.artist)[:5]
+        similar_album = all_albums.filter(Q(genre__name__icontains=genre)).distinct().exclude(title=album.title)[:5]
+        similar_song = songss.filter(Q(genre__name__icontains=genre)).distinct().exclude(album=album.id)[:5]
         return render(request, 'music/song/song_detail.html', {'song': song,
                                                                'user': user,
                                                                'album': album,
@@ -288,7 +316,7 @@ def song_detail(request, song_id):
 
 def edit_song(request, song_id):
     song = Song.objects.get(pk=song_id)
-    form = SongForm1(request.POST or None, request.FILES or None, instance=song)
+    form = SongForm1(instance=song)
     if form.is_valid():
         song.save()
         all_songs = Song.objects.all()
@@ -301,20 +329,19 @@ def edit_song(request, song_id):
 
 def edit_album(request, album_id):
     album = Album.objects.get(pk=album_id)
-    form = AlbumForm(request.POST or None, request.FILES or None, instance=album)
+    form = AlbumForm(instance=album)
     if form.is_valid():
         album.save()
-        all_albums = Album.objects.all()
-        return render(request, 'music/album/albums.html', {
-                               'album_list': all_albums,
-                               'filter_by': all})
+        return render(request, 'music/album/album_detail.html', {
+                               'album': album})
     return render(request, 'music/album/album_edit.html', {'form': form,
                                                            'album': album})
 
 
 def edit_artist(request, artist_id):
     artist = Artist.objects.get(pk=artist_id)
-    form = ArtistForm(request.POST or None, request.FILES or None, instance=artist)
+    #form = ArtistForm(request.POST or None, request.FILES or None, instance=artist)
+    form = ArtistForm(instance=artist)
     if form.is_valid():
         artist.save()
         all_songs = Song.objects.all()
