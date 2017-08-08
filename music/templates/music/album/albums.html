@@ -46,7 +46,8 @@
                             <h4>{{ album.artist }}</h4>
 
                             <!-- View Details -->
-                            <a href="{% url 'music:album_detail' album.id %}" class="btn btn-primary btn-sm" role="button">View
+                            <a href="{% url 'music:album_detail' album.id %}" class="btn btn-primary btn-sm"
+                               role="button">View
                                 Details</a>
 
                             <!-- Delete Album -->
@@ -64,8 +65,8 @@
                                   style="display: inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="album_id" value="{{ album.id }}"/>
-                                    <button type="submit" class="btn btn-default btn-sm"/>
-                                    <span class="glyphicon glyphicon-edit"></span>
+                                <button type="submit" class="btn btn-default btn-sm"/>
+                                <span class="glyphicon glyphicon-edit"></span>
                                 </button>
                             </form>
 
@@ -82,14 +83,45 @@
 
                 <!-- ?? -->
                 {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
-
             {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            <div class="albums-container container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% if albums.has_other_pages %}
+                            <ul class="pagination">
+                                {% if albums.has_previous %}
+                                    <li><a href="?page={{ albums.previous_page_number }}">&laquo;</a></li>
+                                {% else %}
+                                    <li class="disabled"><span>&laquo;</span></li>
+                                {% endif %}
+                                {% for i in albums.page_range %}
+                                    {% if not i %}
+                                        <li><a href="">...</a></li>
+                                    {% else %}
+                                        {% if albums.number == i %}
+                                            <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+                                        {% else %}
+                                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if albums.has_next %}
+                                    <li><a href="?page={{ albums.next_page_number }}">&raquo;</a></li>
+                                {% else %}
+                                    <li class="disabled"><span>&raquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
 
         {% else %}
             <p>There are no albums to show</p>
 
         {% endif %}
-
-    </div>
 
 {% endblock %}

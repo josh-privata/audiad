@@ -26,12 +26,14 @@
 
                         <!-- Album Title -->
                         <h1>{{ album.title }}
-                            <small>{{ album.genre.name }}</small>
+                            {% for value in album.genre.iterator %}
+                                <small>{{ value }}</small>
+                            {% endfor %}
                         </h1>
 
                         <!-- Album SubTitle -->
-                        {% if album.subtitle %}
-                            <h1><small>{{ album.subtitle }}</small></h1>
+                        {% if not album.subtitle.isdigit %}
+                            <h1><small>{{ album.subtitle.title }}</small></h1>
                         {% endif %}
 
                         <!-- Album Favourite -->

@@ -2,3 +2,7 @@ django-taggit==0.22.1
 mutagen
 Django==1.11.3
 django_tables2
+django-filter
+tablib
+elasticsearch
+logstash

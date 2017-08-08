@@ -14,6 +14,8 @@ import os
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from elasticsearch import Elasticsearch, RequestsHttpConnection
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -26,13 +28,16 @@ SECRET_KEY = 'kv0*y2ka3$xp6(i0knij9jd!2b^*%+t8+1+y82px*cp-d)-pf7'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+ES_CLIENT = Elasticsearch(
+    ['http://127.0.0.1:9200/'], connection_class=RequestsHttpConnection)
 
 # Application definition
 
 INSTALLED_APPS = [
     'django_tables2',
     'taggit',
+    'django_filters',
+    'elasticsearch_dsl',
     'blog.apps.BlogConfig',
     'music.apps.MusicConfig',
     'django.contrib.admin',
@@ -42,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,7 +96,7 @@ WSGI_APPLICATION = 'website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'NAME': '/home/josh/Code/django/Djangles/mydatabase',
     }
 }
 
@@ -111,6 +117,49 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
+
+# LOGGING = {
+#   'version': 1,
+#   'disable_existing_loggers': False,
+#   'formatters': {
+#       'simple': {
+#             'format': '%(levelname)s %(message)s'
+#         },
+#   },
+#   'handlers': {
+#         'console': {
+#             'level': 'INFO',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple'
+#         },
+#         'logstash': {
+#             'level': 'DEBUG',
+#             'class': 'logstash.event.Event',
+#             'host': 'localhost',
+#             'port': 5959, # Default value: 5959
+#             'version': 1, # Version of logstash event schema. Default value: 0 (for backward compatibility of the library)
+#             'message_type': 'django',  # 'type' field in logstash message. Default value: 'logstash'.
+#             'fqdn': False, # Fully qualified domain name. Default value: false.
+#             'tags': ['django.request'], # list of tags. Default: None.
+#         },
+#   },
+#   'loggers': {
+#         'django.request': {
+#             'handlers': ['logstash'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#         'django': {
+#             'handlers': ['console'],
+#             'propagate': True,
+#         },
+#     }
+# }
 
 
 # Internationalization
