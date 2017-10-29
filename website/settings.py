@@ -27,7 +27,7 @@ SECRET_KEY = 'kv0*y2ka3$xp6(i0knij9jd!2b^*%+t8+1+y82px*cp-d)-pf7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 ES_CLIENT = Elasticsearch(
     ['http://127.0.0.1:9200/'], connection_class=RequestsHttpConnection)
 
@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'taggit',
     'django_filters',
     'elasticsearch_dsl',
+    'haystack',
+    'widget_tweaks',
+    'mptt',
     'blog.apps.BlogConfig',
     'music.apps.MusicConfig',
     'django.contrib.admin',
@@ -65,8 +68,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
+        'APP_DIRS': False,
         'OPTIONS': {
+            'debug': True,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -96,7 +100,7 @@ WSGI_APPLICATION = 'website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/josh/Code/django/Djangles/mydatabase',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -117,11 +121,22 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 ELASTICSEARCH_DSL = {
     'default': {
         'hosts': 'localhost:9200'
     },
 }
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'audiad',
+    },
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # LOGGING = {
 #   'version': 1,
@@ -177,7 +192,12 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+LOGOUT_REDIRECT_URL = '/music'

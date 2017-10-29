@@ -1,0 +1,329 @@
+.
+├── accounts
+│   ├── migrations
+│   │   ├── __pycache__
+│   │   │   └── __init__.cpython-35.pyc
+│   │   └── __init__.py
+│   ├── __pycache__
+│   │   ├── forms.cpython-35.pyc
+│   │   ├── __init__.cpython-35.pyc
+│   │   ├── tests.cpython-35.pyc
+│   │   └── views.cpython-35.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
+├── conf
+│   ├── __pycache__
+│   │   └── __init__.cpython-35.pyc
+│   ├── base.py
+│   └── __init__.py
+├── docs
+│   ├── data.dump
+│   ├── django-best-practices.pdf
+│   ├── django-filter.pdf
+│   ├── Dockerfile
+│   ├── How to use FreeDB.txt
+│   ├── logstash.conf
+│   ├── README.md
+│   └── start_gunicorn.sh
+├── importer
+│   ├── migrations
+│   │   ├── __pycache__
+│   │   │   └── __init__.cpython-35.pyc
+│   │   └── __init__.py
+│   ├── musicimport
+│   │   ├── __pycache__
+│   │   │   ├── file_scraper.cpython-35.pyc
+│   │   │   ├── __init__.cpython-35.pyc
+│   │   │   └── mediafile.cpython-35.pyc
+│   │   ├── d
+│   │   ├── db_connect.py
+│   │   ├── f
+│   │   ├── file_scraper.py
+│   │   ├── genres-tree.yaml
+│   │   ├── genres.txt
+│   │   ├── id3info.py
+│   │   ├── id3_tagger.py
+│   │   ├── __init__.py
+│   │   ├── mediafile.py
+│   │   └── song.mp3
+│   ├── __pycache__
+│   │   ├── __init__.cpython-35.pyc
+│   │   └── urls.cpython-35.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── urls.py
+│   └── views.py
+├── music
+│   ├── migrations
+│   │   ├── __pycache__
+│   │   │   ├── 0001_initial.cpython-35.pyc
+│   │   │   ├── 0002_auto_20170815_0124.cpython-35.pyc
+│   │   │   └── __init__.cpython-35.pyc
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_auto_20170815_0124.py
+│   │   └── __init__.py
+│   ├── __pycache__
+│   │   ├── admin.cpython-35.pyc
+│   │   ├── apps.cpython-35.pyc
+│   │   ├── filters.cpython-35.pyc
+│   │   ├── forms.cpython-35.pyc
+│   │   ├── __init__.cpython-35.pyc
+│   │   ├── managers.cpython-35.pyc
+│   │   ├── models.cpython-35.pyc
+│   │   ├── search_indexes.cpython-35.pyc
+│   │   ├── tables.cpython-35.pyc
+│   │   ├── tests.cpython-35.pyc
+│   │   └── urls.cpython-35.pyc
+│   ├── views
+│   │   ├── __pycache__
+│   │   │   ├── album.cpython-35.pyc
+│   │   │   ├── artist.cpython-35.pyc
+│   │   │   ├── genre.cpython-35.pyc
+│   │   │   ├── __init__.cpython-35.pyc
+│   │   │   ├── label.cpython-35.pyc
+│   │   │   ├── song.cpython-35.pyc
+│   │   │   └── views.cpython-35.pyc
+│   │   ├── album.py
+│   │   ├── artist.py
+│   │   ├── genre.py
+│   │   ├── __init__.py
+│   │   ├── label.py
+│   │   ├── song.py
+│   │   └── views.py
+│   ├── admin.py
+│   ├── admin.pyc
+│   ├── apps.py
+│   ├── apps.pyc
+│   ├── command.py
+│   ├── filters.py
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── managers.py
+│   ├── models.py
+│   ├── models.pyc
+│   ├── search_indexes.py
+│   ├── signals.py
+│   ├── tables.py
+│   ├── tests.py
+│   └── urls.py
+├── __pycache__
+│   └── command.cpython-35.pyc
+├── static
+│   ├── images
+│   │   └── background.png
+│   ├── js
+│   │   └── main.js
+│   ├── themes
+│   │   └── table
+│   │       ├── css
+│   │       │   └── screen.css
+│   │       └── img
+│   │           ├── arrow-active-down.png
+│   │           ├── arrow-active-up.png
+│   │           ├── arrow-inactive-down.png
+│   │           ├── arrow-inactive-up.png
+│   │           ├── false.gif
+│   │           ├── header-bg.png
+│   │           ├── missing.png
+│   │           ├── pagination-bg.gif
+│   │           └── true.gif
+│   ├── favicon.ico
+│   └── style.css
+├── templates
+│   ├── accounts
+│   │   ├── forms.html
+│   │   └── signup.html
+│   ├── admin
+│   │   ├── base_site.html
+│   │   └── index.html
+│   ├── base
+│   │   ├── base.html
+│   │   ├── base_visitor.html
+│   │   └── form_template.html
+│   ├── music
+│   │   ├── album
+│   │   │   ├── album_create.html
+│   │   │   ├── album_delete.html
+│   │   │   ├── album_detail_bak.html
+│   │   │   ├── album_detail.html
+│   │   │   ├── album_filter.html
+│   │   │   ├── album_list.html
+│   │   │   ├── albums.html
+│   │   │   ├── album_table.html
+│   │   │   ├── album_update.html
+│   │   │   └── bootstrap-responsive.html
+│   │   ├── artist
+│   │   │   ├── artist_create.html
+│   │   │   ├── artist_delete.html
+│   │   │   ├── artist_detail.html
+│   │   │   ├── artist_edit.html
+│   │   │   ├── artist_filter.html
+│   │   │   ├── artist_list.html
+│   │   │   ├── artists.html
+│   │   │   ├── artist_table.html
+│   │   │   ├── artist_update.html
+│   │   │   └── bootstrap-responsive.html
+│   │   ├── auth
+│   │   │   ├── login.html
+│   │   │   ├── profile.html
+│   │   │   └── register.html
+│   │   ├── base
+│   │   │   ├── album_1col.html
+│   │   │   ├── album_2col.html
+│   │   │   ├── album_base.html
+│   │   │   ├── artist_1col.html
+│   │   │   ├── artist_2col.html
+│   │   │   ├── artist_base.html
+│   │   │   ├── genre_1col.html
+│   │   │   ├── genre_2col.html
+│   │   │   ├── genre_base.html
+│   │   │   ├── label_1col.html
+│   │   │   ├── label_2col.html
+│   │   │   ├── label_base.html
+│   │   │   ├── song_1col.html
+│   │   │   ├── song_2col.html
+│   │   │   └── song_base.html
+│   │   ├── genre
+│   │   │   ├── bootstrap-responsive.html
+│   │   │   ├── genre_create.html
+│   │   │   ├── genre_delete.html
+│   │   │   ├── genre_detail.html
+│   │   │   ├── genre_filter.html
+│   │   │   ├── genre_list.html
+│   │   │   ├── genres.html
+│   │   │   ├── genre_table.html
+│   │   │   └── genre_update.html
+│   │   ├── label
+│   │   │   ├── bootstrap-responsive.html
+│   │   │   ├── label_create.html
+│   │   │   ├── label_delete.html
+│   │   │   ├── label_detail.html
+│   │   │   ├── label_filter.html
+│   │   │   ├── label_list.html
+│   │   │   ├── labels.html
+│   │   │   ├── label_table.html
+│   │   │   └── label_update.html
+│   │   ├── search
+│   │   │   ├── indexes
+│   │   │   │   └── music
+│   │   │   │       └── album_text.txt
+│   │   │   ├── album_search.html
+│   │   │   └── searchresults.html
+│   │   ├── song
+│   │   │   ├── bootstrap-responsive.html
+│   │   │   ├── song_create.html
+│   │   │   ├── song_delete.html
+│   │   │   ├── song_detail.html
+│   │   │   ├── song_filter.html
+│   │   │   ├── song_list.html
+│   │   │   ├── songs.html
+│   │   │   ├── songs_table.html
+│   │   │   └── song_update.html
+│   │   ├── fake-class-tables.html
+│   │   ├── fake-index.html
+│   │   └── index.html
+│   └── search
+│       ├── indexes
+│       │   └── music
+│       │       └── album_text.txt
+│       ├── album_search.html
+│       └── search.html
+├── templates-bak
+│   └── music
+│       ├── album
+│       │   ├── album_create.html
+│       │   ├── album_delete.html
+│       │   ├── album_detail_bak.html
+│       │   ├── album_detail.html
+│       │   ├── album_filter.html
+│       │   ├── album_list.html
+│       │   ├── albums.html
+│       │   ├── album_table.html
+│       │   ├── album_update.html
+│       │   └── bootstrap-responsive.html
+│       ├── artist
+│       │   ├── artist_create.html
+│       │   ├── artist_delete.html
+│       │   ├── artist_detail.html
+│       │   ├── artist_edit.html
+│       │   ├── artist_filter.html
+│       │   ├── artist_list.html
+│       │   ├── artists.html
+│       │   ├── artist_table.html
+│       │   ├── artist_update.html
+│       │   └── bootstrap-responsive.html
+│       ├── auth
+│       │   ├── login.html
+│       │   ├── profile.html
+│       │   └── register.html
+│       ├── base
+│       │   ├── base.html
+│       │   ├── base_visitor.html
+│       │   └── form_template.html
+│       ├── genre
+│       │   ├── album_delete.html
+│       │   ├── bootstrap-responsive.html
+│       │   ├── create_genre.html
+│       │   ├── genre_detail.html
+│       │   ├── genre_edit.html
+│       │   ├── genres.html
+│       │   ├── song_create.html
+│       │   ├── song_detail.html
+│       │   ├── song_list.html
+│       │   ├── songs.html
+│       │   ├── songs_table.html
+│       │   └── song_update.html
+│       ├── search
+│       │   ├── indexes
+│       │   │   └── music
+│       │   │       └── album_text.txt
+│       │   ├── album_search.html
+│       │   └── searchresults.html
+│       ├── song
+│       │   ├── bootstrap-responsive.html
+│       │   ├── hi.html
+│       │   ├── song_create.html
+│       │   ├── song_delete.html
+│       │   ├── song_detail.html
+│       │   ├── song_filter.html
+│       │   ├── song_list.html
+│       │   ├── songs.html
+│       │   ├── songs_table.html
+│       │   └── song_update.html
+│       ├── fake-class-tables.html
+│       ├── fake-index.html
+│       └── index.html
+├── website
+│   ├── __pycache__
+│   │   ├── filter_mixin.cpython-35.pyc
+│   │   ├── __init__.cpython-35.pyc
+│   │   ├── settings.cpython-35.pyc
+│   │   ├── urls.cpython-35.pyc
+│   │   └── wsgi.cpython-35.pyc
+│   ├── filter_mixin.py
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── settings.py
+│   ├── settings.pyc
+│   ├── urls.py
+│   ├── urls.pyc
+│   └── wsgi.py
+├── command.py
+├── gunicorn.log
+├── manage.py
+├── mydatabase
+├── requirements.txt
+├── tree.html
+├── tree.json
+├── tree.txt
+└── tree.xml
+
+58 directories, 268 files

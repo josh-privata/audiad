@@ -1,0 +1,135 @@
+{% extends 'music/base/song_2col.html' %}
+
+<!-- Left Panel -->
+{% block panel1 %}
+    <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Selection Header -->
+                <ul class="nav nav-pills" style="margin-bottom: 10px;">
+
+                    <!-- Show All -->
+                    <li role="presentation" {% if filter_by == 'all' %}class="active"{% endif %}><a
+                            href="{% url 'music:songs' 'all' %}">View All</a></li>
+
+                    <!-- Show Favourites -->
+                    <li role="presentation" {% if filter_by == 'favorites' %}class="active"{% endif %}><a
+                            href="{% url 'music:songs' 'favorites' %}">Favorites</a></li>
+
+                </ul>
+
+            </div>
+        </div>
+{% endblock %}
+
+<!-- Right Panel -->
+{% block panel2 %}
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!-- Panel -->
+        <div class="panel panel-default">
+
+            <!-- Panel Body -->
+            <div class="panel-body">
+
+                <!-- Results Table -->
+                <table class="table">
+
+                    <!-- Table Head -->
+                    <thead>
+                        <tr>
+                            <th>Song Title</th>
+                            <th>Artist</th>
+                            <th>Playa</th>
+                            <th>Album</th>
+                            <th>Favorite</th>
+                        </tr>
+                    </thead>
+<!-- Right Panel -->
+{% if song_list %}
+                    <!-- Table Body -->
+                    <tbody>
+                        {% for song in song_list %}
+                            <tr>
+
+                                <!-- Song Title -->
+                                <td>
+                                    <a href="{% url 'music:song_detail' song.id %}" role="button">{{ song.title }}</a>
+                                </td>
+
+                                <!-- Artist -->
+                                <td>
+                                    <a href="{% url 'music:artist_detail' song.album.artist.id %}" role="button">
+                                        {{ song.album.artist }}
+                                    </a>
+                                </td>
+
+                                <!-- Playa -->
+                                <td>
+                                    <a target="_blank" href="">
+                                    <button type="button" class="btn btn-success btn-xs">
+                                        <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                    </button>
+                                </a>
+                                </td>
+
+                                <!-- Album -->
+                                <td>
+                                    <a href="{% url 'music:album_detail' song.album.id %}">{{ song.album.title }}</a>
+                                </td>
+
+                                <!-- Favorite -->
+                                <td>
+                                    <a href="{% url 'music:fav_song' song.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star {% if song.fav %}active{% endif %}"></span></a>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+            <!-- Pagination -->
+    <div class="albums-container container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                {% if song_list.has_other_pages %}
+                    <ul class="pagination">
+                        {% if song_list.has_previous %}
+                            <li><a href="?page={{ song_list.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in song_list.page_range %}
+                            {% if not i %}
+                                <li><a href="">...</a></li>
+                            {% else %}
+                                {% if song_list.number == i %}
+                                    <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+                                {% else %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if song_list.has_next %}
+                            <li><a href="?page={{ song_list.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <p>There are no songs to show</p>
+
+{% endif %}
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

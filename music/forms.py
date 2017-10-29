@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Album, Song, Artist, Genre
+from haystack.forms import SearchForm
+
+from .models import Album, Song, Artist, Genre, Label
 
 
 class UserForm(forms.ModelForm):
@@ -9,6 +11,28 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+
+
+class AlbumSearchForm(SearchForm):
+    title = forms.CharField()
+    artist = forms.CharField()
+
+    class Meta:
+        model = Album
+        fields = ['artist', 'title', 'genre', 'subtitle', 'producer', 'date',
+                  'year', 'cover', 'discogs_url', 'fav', 'tags']
+
+    def search(self):
+        # First, store the SearchQuerySet received from other processing.
+        sqs = super(AlbumSearchForm, self).search()
+        if not self.is_valid():
+            return self.no_query_found()
+        else:
+            sqs = sqs.filter(title___iequals=self.cleaned_data['title'])
+        return sqs
+
+    def no_query_found(self):
+        return self.searchqueryset.all()
 
 
 # class ProfileForm(forms.ModelForm):
@@ -39,6 +63,12 @@ class ArtistForm(forms.ModelForm):
 class GenreForm(forms.ModelForm):
     class Meta:
         model = Genre
+        fields = ['name', 'fav', 'tags']
+
+
+class LabelForm(forms.ModelForm):
+    class Meta:
+        model = Label
         fields = ['name', 'fav', 'tags']
 
 

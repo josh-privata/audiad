@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="Author" content="Made by 'tree'">
+ <meta name="GENERATOR" content="$Version: $ tree v1.7.0 (c) 1996 - 2014 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro $">
+ <title>Directory Tree</title>
+ <style type="text/css">
+  <!-- 
+  BODY { font-family : ariel, monospace, sans-serif; }
+  P { font-weight: normal; font-family : ariel, monospace, sans-serif; color: black; background-color: transparent;}
+  B { font-weight: normal; color: black; background-color: transparent;}
+  A:visited { font-weight : normal; text-decoration : none; background-color : transparent; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; }
+  A:link    { font-weight : normal; text-decoration : none; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; }
+  A:hover   { color : #000000; font-weight : normal; text-decoration : underline; background-color : yellow; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; }
+  A:active  { color : #000000; font-weight: normal; background-color : transparent; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; }
+  .VERSION { font-size: small; font-family : arial, sans-serif; }
+  .NORM  { color: black;  background-color: transparent;}
+  .FIFO  { color: purple; background-color: transparent;}
+  .CHAR  { color: yellow; background-color: transparent;}
+  .DIR   { color: blue;   background-color: transparent;}
+  .BLOCK { color: yellow; background-color: transparent;}
+  .LINK  { color: aqua;   background-color: transparent;}
+  .SOCK  { color: fuchsia;background-color: transparent;}
+  .EXEC  { color: green;  background-color: transparent;}
+  -->
+ </style>
+</head>
+<body>
+	<h1>Directory Tree</h1><p>
+	<a href=""></a><br>
+	├── <a href="/accounts/">accounts</a><br>
+	│   ├── <a href="/accounts/migrations/">migrations</a><br>
+	│   │   ├── <a href="/accounts/migrations/__pycache__/">__pycache__</a><br>
+	│   │   │   └── <a href="/accounts/migrations/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   │   └── <a href="/accounts/migrations/__init__.py">__init__.py</a><br>
+	│   ├── <a href="/accounts/__pycache__/">__pycache__</a><br>
+	│   │   ├── <a href="/accounts/__pycache__/forms.cpython-35.pyc">forms.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/accounts/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/accounts/__pycache__/tests.cpython-35.pyc">tests.cpython-35.pyc</a><br>
+	│   │   └── <a href="/accounts/__pycache__/views.cpython-35.pyc">views.cpython-35.pyc</a><br>
+	│   ├── <a href="/accounts/admin.py">admin.py</a><br>
+	│   ├── <a href="/accounts/apps.py">apps.py</a><br>
+	│   ├── <a href="/accounts/forms.py">forms.py</a><br>
+	│   ├── <a href="/accounts/__init__.py">__init__.py</a><br>
+	│   ├── <a href="/accounts/models.py">models.py</a><br>
+	│   ├── <a href="/accounts/tests.py">tests.py</a><br>
+	│   └── <a href="/accounts/views.py">views.py</a><br>
+	├── <a href="/conf/">conf</a><br>
+	│   ├── <a href="/conf/__pycache__/">__pycache__</a><br>
+	│   │   └── <a href="/conf/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   ├── <a href="/conf/base.py">base.py</a><br>
+	│   └── <a href="/conf/__init__.py">__init__.py</a><br>
+	├── <a href="/docs/">docs</a><br>
+	│   ├── <a href="/docs/data.dump">data.dump</a><br>
+	│   ├── <a href="/docs/django-best-practices.pdf">django-best-practices.pdf</a><br>
+	│   ├── <a href="/docs/django-filter.pdf">django-filter.pdf</a><br>
+	│   ├── <a href="/docs/Dockerfile">Dockerfile</a><br>
+	│   ├── <a href="/docs/How%20to%20use%20FreeDB.txt">How to use FreeDB.txt</a><br>
+	│   ├── <a href="/docs/logstash.conf">logstash.conf</a><br>
+	│   ├── <a href="/docs/README.md">README.md</a><br>
+	│   └── <a href="/docs/start_gunicorn.sh">start_gunicorn.sh</a><br>
+	├── <a href="/importer/">importer</a><br>
+	│   ├── <a href="/importer/migrations/">migrations</a><br>
+	│   │   ├── <a href="/importer/migrations/__pycache__/">__pycache__</a><br>
+	│   │   │   └── <a href="/importer/migrations/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   │   └── <a href="/importer/migrations/__init__.py">__init__.py</a><br>
+	│   ├── <a href="/importer/musicimport/">musicimport</a><br>
+	│   │   ├── <a href="/importer/musicimport/__pycache__/">__pycache__</a><br>
+	│   │   │   ├── <a href="/importer/musicimport/__pycache__/file_scraper.cpython-35.pyc">file_scraper.cpython-35.pyc</a><br>
+	│   │   │   ├── <a href="/importer/musicimport/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   │   │   └── <a href="/importer/musicimport/__pycache__/mediafile.cpython-35.pyc">mediafile.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/importer/musicimport/d">d</a><br>
+	│   │   ├── <a href="/importer/musicimport/db_connect.py">db_connect.py</a><br>
+	│   │   ├── <a href="/importer/musicimport/f">f</a><br>
+	│   │   ├── <a href="/importer/musicimport/file_scraper.py">file_scraper.py</a><br>
+	│   │   ├── <a href="/importer/musicimport/genres-tree.yaml">genres-tree.yaml</a><br>
+	│   │   ├── <a href="/importer/musicimport/genres.txt">genres.txt</a><br>
+	│   │   ├── <a href="/importer/musicimport/id3info.py">id3info.py</a><br>
+	│   │   ├── <a href="/importer/musicimport/id3_tagger.py">id3_tagger.py</a><br>
+	│   │   ├── <a href="/importer/musicimport/__init__.py">__init__.py</a><br>
+	│   │   ├── <a href="/importer/musicimport/mediafile.py">mediafile.py</a><br>
+	│   │   └── <a href="/importer/musicimport/song.mp3">song.mp3</a><br>
+	│   ├── <a href="/importer/__pycache__/">__pycache__</a><br>
+	│   │   ├── <a href="/importer/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   │   └── <a href="/importer/__pycache__/urls.cpython-35.pyc">urls.cpython-35.pyc</a><br>
+	│   ├── <a href="/importer/admin.py">admin.py</a><br>
+	│   ├── <a href="/importer/apps.py">apps.py</a><br>
+	│   ├── <a href="/importer/__init__.py">__init__.py</a><br>
+	│   ├── <a href="/importer/models.py">models.py</a><br>
+	│   ├── <a href="/importer/urls.py">urls.py</a><br>
+	│   └── <a href="/importer/views.py">views.py</a><br>
+	├── <a href="/music/">music</a><br>
+	│   ├── <a href="/music/migrations/">migrations</a><br>
+	│   │   ├── <a href="/music/migrations/__pycache__/">__pycache__</a><br>
+	│   │   │   ├── <a href="/music/migrations/__pycache__/0001_initial.cpython-35.pyc">0001_initial.cpython-35.pyc</a><br>
+	│   │   │   ├── <a href="/music/migrations/__pycache__/0002_auto_20170815_0124.cpython-35.pyc">0002_auto_20170815_0124.cpython-35.pyc</a><br>
+	│   │   │   └── <a href="/music/migrations/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/migrations/0001_initial.py">0001_initial.py</a><br>
+	│   │   ├── <a href="/music/migrations/0002_auto_20170815_0124.py">0002_auto_20170815_0124.py</a><br>
+	│   │   └── <a href="/music/migrations/__init__.py">__init__.py</a><br>
+	│   ├── <a href="/music/__pycache__/">__pycache__</a><br>
+	│   │   ├── <a href="/music/__pycache__/admin.cpython-35.pyc">admin.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/__pycache__/apps.cpython-35.pyc">apps.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/__pycache__/filters.cpython-35.pyc">filters.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/__pycache__/forms.cpython-35.pyc">forms.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/__pycache__/managers.cpython-35.pyc">managers.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/__pycache__/models.cpython-35.pyc">models.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/__pycache__/search_indexes.cpython-35.pyc">search_indexes.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/__pycache__/tables.cpython-35.pyc">tables.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/__pycache__/tests.cpython-35.pyc">tests.cpython-35.pyc</a><br>
+	│   │   └── <a href="/music/__pycache__/urls.cpython-35.pyc">urls.cpython-35.pyc</a><br>
+	│   ├── <a href="/music/views/">views</a><br>
+	│   │   ├── <a href="/music/views/__pycache__/">__pycache__</a><br>
+	│   │   │   ├── <a href="/music/views/__pycache__/album.cpython-35.pyc">album.cpython-35.pyc</a><br>
+	│   │   │   ├── <a href="/music/views/__pycache__/artist.cpython-35.pyc">artist.cpython-35.pyc</a><br>
+	│   │   │   ├── <a href="/music/views/__pycache__/genre.cpython-35.pyc">genre.cpython-35.pyc</a><br>
+	│   │   │   ├── <a href="/music/views/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   │   │   ├── <a href="/music/views/__pycache__/label.cpython-35.pyc">label.cpython-35.pyc</a><br>
+	│   │   │   ├── <a href="/music/views/__pycache__/song.cpython-35.pyc">song.cpython-35.pyc</a><br>
+	│   │   │   └── <a href="/music/views/__pycache__/views.cpython-35.pyc">views.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/music/views/album.py">album.py</a><br>
+	│   │   ├── <a href="/music/views/artist.py">artist.py</a><br>
+	│   │   ├── <a href="/music/views/genre.py">genre.py</a><br>
+	│   │   ├── <a href="/music/views/__init__.py">__init__.py</a><br>
+	│   │   ├── <a href="/music/views/label.py">label.py</a><br>
+	│   │   ├── <a href="/music/views/song.py">song.py</a><br>
+	│   │   └── <a href="/music/views/views.py">views.py</a><br>
+	│   ├── <a href="/music/admin.py">admin.py</a><br>
+	│   ├── <a href="/music/admin.pyc">admin.pyc</a><br>
+	│   ├── <a href="/music/apps.py">apps.py</a><br>
+	│   ├── <a href="/music/apps.pyc">apps.pyc</a><br>
+	│   ├── <a href="/music/command.py">command.py</a><br>
+	│   ├── <a href="/music/filters.py">filters.py</a><br>
+	│   ├── <a href="/music/forms.py">forms.py</a><br>
+	│   ├── <a href="/music/__init__.py">__init__.py</a><br>
+	│   ├── <a href="/music/__init__.pyc">__init__.pyc</a><br>
+	│   ├── <a href="/music/managers.py">managers.py</a><br>
+	│   ├── <a href="/music/models.py">models.py</a><br>
+	│   ├── <a href="/music/models.pyc">models.pyc</a><br>
+	│   ├── <a href="/music/search_indexes.py">search_indexes.py</a><br>
+	│   ├── <a href="/music/signals.py">signals.py</a><br>
+	│   ├── <a href="/music/tables.py">tables.py</a><br>
+	│   ├── <a href="/music/tests.py">tests.py</a><br>
+	│   └── <a href="/music/urls.py">urls.py</a><br>
+	├── <a href="/__pycache__/">__pycache__</a><br>
+	│   └── <a href="/__pycache__/command.cpython-35.pyc">command.cpython-35.pyc</a><br>
+	├── <a href="/static/">static</a><br>
+	│   ├── <a href="/static/images/">images</a><br>
+	│   │   └── <a href="/static/images/background.png">background.png</a><br>
+	│   ├── <a href="/static/js/">js</a><br>
+	│   │   └── <a href="/static/js/main.js">main.js</a><br>
+	│   ├── <a href="/static/themes/">themes</a><br>
+	│   │   └── <a href="/static/themes/table/">table</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; ├── <a href="/static/themes/table/css/">css</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; │   └── <a href="/static/themes/table/css/screen.css">screen.css</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; └── <a href="/static/themes/table/img/">img</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="/static/themes/table/img/arrow-active-down.png">arrow-active-down.png</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="/static/themes/table/img/arrow-active-up.png">arrow-active-up.png</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="/static/themes/table/img/arrow-inactive-down.png">arrow-inactive-down.png</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="/static/themes/table/img/arrow-inactive-up.png">arrow-inactive-up.png</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="/static/themes/table/img/false.gif">false.gif</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="/static/themes/table/img/header-bg.png">header-bg.png</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="/static/themes/table/img/missing.png">missing.png</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a href="/static/themes/table/img/pagination-bg.gif">pagination-bg.gif</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a href="/static/themes/table/img/true.gif">true.gif</a><br>
+	│   ├── <a href="/static/favicon.ico">favicon.ico</a><br>
+	│   └── <a href="/static/style.css">style.css</a><br>
+	├── <a href="/templates/">templates</a><br>
+	│   ├── <a href="/templates/accounts/">accounts</a><br>
+	│   │   ├── <a href="/templates/accounts/forms.html">forms.html</a><br>
+	│   │   └── <a href="/templates/accounts/signup.html">signup.html</a><br>
+	│   ├── <a href="/templates/admin/">admin</a><br>
+	│   │   ├── <a href="/templates/admin/base_site.html">base_site.html</a><br>
+	│   │   └── <a href="/templates/admin/index.html">index.html</a><br>
+	│   ├── <a href="/templates/base/">base</a><br>
+	│   │   ├── <a href="/templates/base/base.html">base.html</a><br>
+	│   │   ├── <a href="/templates/base/base_visitor.html">base_visitor.html</a><br>
+	│   │   └── <a href="/templates/base/form_template.html">form_template.html</a><br>
+	│   ├── <a href="/templates/music/">music</a><br>
+	│   │   ├── <a href="/templates/music/album/">album</a><br>
+	│   │   │   ├── <a href="/templates/music/album/album_create.html">album_create.html</a><br>
+	│   │   │   ├── <a href="/templates/music/album/album_delete.html">album_delete.html</a><br>
+	│   │   │   ├── <a href="/templates/music/album/album_detail_bak.html">album_detail_bak.html</a><br>
+	│   │   │   ├── <a href="/templates/music/album/album_detail.html">album_detail.html</a><br>
+	│   │   │   ├── <a href="/templates/music/album/album_filter.html">album_filter.html</a><br>
+	│   │   │   ├── <a href="/templates/music/album/album_list.html">album_list.html</a><br>
+	│   │   │   ├── <a href="/templates/music/album/albums.html">albums.html</a><br>
+	│   │   │   ├── <a href="/templates/music/album/album_table.html">album_table.html</a><br>
+	│   │   │   ├── <a href="/templates/music/album/album_update.html">album_update.html</a><br>
+	│   │   │   └── <a href="/templates/music/album/bootstrap-responsive.html">bootstrap-responsive.html</a><br>
+	│   │   ├── <a href="/templates/music/artist/">artist</a><br>
+	│   │   │   ├── <a href="/templates/music/artist/artist_create.html">artist_create.html</a><br>
+	│   │   │   ├── <a href="/templates/music/artist/artist_delete.html">artist_delete.html</a><br>
+	│   │   │   ├── <a href="/templates/music/artist/artist_detail.html">artist_detail.html</a><br>
+	│   │   │   ├── <a href="/templates/music/artist/artist_edit.html">artist_edit.html</a><br>
+	│   │   │   ├── <a href="/templates/music/artist/artist_filter.html">artist_filter.html</a><br>
+	│   │   │   ├── <a href="/templates/music/artist/artist_list.html">artist_list.html</a><br>
+	│   │   │   ├── <a href="/templates/music/artist/artists.html">artists.html</a><br>
+	│   │   │   ├── <a href="/templates/music/artist/artist_table.html">artist_table.html</a><br>
+	│   │   │   ├── <a href="/templates/music/artist/artist_update.html">artist_update.html</a><br>
+	│   │   │   └── <a href="/templates/music/artist/bootstrap-responsive.html">bootstrap-responsive.html</a><br>
+	│   │   ├── <a href="/templates/music/auth/">auth</a><br>
+	│   │   │   ├── <a href="/templates/music/auth/login.html">login.html</a><br>
+	│   │   │   ├── <a href="/templates/music/auth/profile.html">profile.html</a><br>
+	│   │   │   └── <a href="/templates/music/auth/register.html">register.html</a><br>
+	│   │   ├── <a href="/templates/music/base/">base</a><br>
+	│   │   │   ├── <a href="/templates/music/base/album_1col.html">album_1col.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/album_2col.html">album_2col.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/album_base.html">album_base.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/artist_1col.html">artist_1col.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/artist_2col.html">artist_2col.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/artist_base.html">artist_base.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/genre_1col.html">genre_1col.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/genre_2col.html">genre_2col.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/genre_base.html">genre_base.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/label_1col.html">label_1col.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/label_2col.html">label_2col.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/label_base.html">label_base.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/song_1col.html">song_1col.html</a><br>
+	│   │   │   ├── <a href="/templates/music/base/song_2col.html">song_2col.html</a><br>
+	│   │   │   └── <a href="/templates/music/base/song_base.html">song_base.html</a><br>
+	│   │   ├── <a href="/templates/music/genre/">genre</a><br>
+	│   │   │   ├── <a href="/templates/music/genre/bootstrap-responsive.html">bootstrap-responsive.html</a><br>
+	│   │   │   ├── <a href="/templates/music/genre/genre_create.html">genre_create.html</a><br>
+	│   │   │   ├── <a href="/templates/music/genre/genre_delete.html">genre_delete.html</a><br>
+	│   │   │   ├── <a href="/templates/music/genre/genre_detail.html">genre_detail.html</a><br>
+	│   │   │   ├── <a href="/templates/music/genre/genre_filter.html">genre_filter.html</a><br>
+	│   │   │   ├── <a href="/templates/music/genre/genre_list.html">genre_list.html</a><br>
+	│   │   │   ├── <a href="/templates/music/genre/genres.html">genres.html</a><br>
+	│   │   │   ├── <a href="/templates/music/genre/genre_table.html">genre_table.html</a><br>
+	│   │   │   └── <a href="/templates/music/genre/genre_update.html">genre_update.html</a><br>
+	│   │   ├── <a href="/templates/music/label/">label</a><br>
+	│   │   │   ├── <a href="/templates/music/label/bootstrap-responsive.html">bootstrap-responsive.html</a><br>
+	│   │   │   ├── <a href="/templates/music/label/label_create.html">label_create.html</a><br>
+	│   │   │   ├── <a href="/templates/music/label/label_delete.html">label_delete.html</a><br>
+	│   │   │   ├── <a href="/templates/music/label/label_detail.html">label_detail.html</a><br>
+	│   │   │   ├── <a href="/templates/music/label/label_filter.html">label_filter.html</a><br>
+	│   │   │   ├── <a href="/templates/music/label/label_list.html">label_list.html</a><br>
+	│   │   │   ├── <a href="/templates/music/label/labels.html">labels.html</a><br>
+	│   │   │   ├── <a href="/templates/music/label/label_table.html">label_table.html</a><br>
+	│   │   │   └── <a href="/templates/music/label/label_update.html">label_update.html</a><br>
+	│   │   ├── <a href="/templates/music/search/">search</a><br>
+	│   │   │   ├── <a href="/templates/music/search/indexes/">indexes</a><br>
+	│   │   │   │   └── <a href="/templates/music/search/indexes/music/">music</a><br>
+	│   │   │   │   &nbsp;&nbsp;&nbsp; └── <a href="/templates/music/search/indexes/music/album_text.txt">album_text.txt</a><br>
+	│   │   │   ├── <a href="/templates/music/search/album_search.html">album_search.html</a><br>
+	│   │   │   └── <a href="/templates/music/search/searchresults.html">searchresults.html</a><br>
+	│   │   ├── <a href="/templates/music/song/">song</a><br>
+	│   │   │   ├── <a href="/templates/music/song/bootstrap-responsive.html">bootstrap-responsive.html</a><br>
+	│   │   │   ├── <a href="/templates/music/song/song_create.html">song_create.html</a><br>
+	│   │   │   ├── <a href="/templates/music/song/song_delete.html">song_delete.html</a><br>
+	│   │   │   ├── <a href="/templates/music/song/song_detail.html">song_detail.html</a><br>
+	│   │   │   ├── <a href="/templates/music/song/song_filter.html">song_filter.html</a><br>
+	│   │   │   ├── <a href="/templates/music/song/song_list.html">song_list.html</a><br>
+	│   │   │   ├── <a href="/templates/music/song/songs.html">songs.html</a><br>
+	│   │   │   ├── <a href="/templates/music/song/songs_table.html">songs_table.html</a><br>
+	│   │   │   └── <a href="/templates/music/song/song_update.html">song_update.html</a><br>
+	│   │   ├── <a href="/templates/music/fake-class-tables.html">fake-class-tables.html</a><br>
+	│   │   ├── <a href="/templates/music/fake-index.html">fake-index.html</a><br>
+	│   │   └── <a href="/templates/music/index.html">index.html</a><br>
+	│   └── <a href="/templates/search/">search</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates/search/indexes/">indexes</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="/templates/search/indexes/music/">music</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a href="/templates/search/indexes/music/album_text.txt">album_text.txt</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates/search/album_search.html">album_search.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="/templates/search/search.html">search.html</a><br>
+	├── <a href="/templates-bak/">templates-bak</a><br>
+	│   └── <a href="/templates-bak/music/">music</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates-bak/music/album/">album</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/album/album_create.html">album_create.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/album/album_delete.html">album_delete.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/album/album_detail_bak.html">album_detail_bak.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/album/album_detail.html">album_detail.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/album/album_filter.html">album_filter.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/album/album_list.html">album_list.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/album/albums.html">albums.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/album/album_table.html">album_table.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/album/album_update.html">album_update.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="/templates-bak/music/album/bootstrap-responsive.html">bootstrap-responsive.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates-bak/music/artist/">artist</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/artist/artist_create.html">artist_create.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/artist/artist_delete.html">artist_delete.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/artist/artist_detail.html">artist_detail.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/artist/artist_edit.html">artist_edit.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/artist/artist_filter.html">artist_filter.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/artist/artist_list.html">artist_list.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/artist/artists.html">artists.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/artist/artist_table.html">artist_table.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/artist/artist_update.html">artist_update.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="/templates-bak/music/artist/bootstrap-responsive.html">bootstrap-responsive.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates-bak/music/auth/">auth</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/auth/login.html">login.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/auth/profile.html">profile.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="/templates-bak/music/auth/register.html">register.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates-bak/music/base/">base</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/base/base.html">base.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/base/base_visitor.html">base_visitor.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="/templates-bak/music/base/form_template.html">form_template.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates-bak/music/genre/">genre</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/album_delete.html">album_delete.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/bootstrap-responsive.html">bootstrap-responsive.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/create_genre.html">create_genre.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/genre_detail.html">genre_detail.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/genre_edit.html">genre_edit.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/genres.html">genres.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/song_create.html">song_create.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/song_detail.html">song_detail.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/song_list.html">song_list.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/songs.html">songs.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/genre/songs_table.html">songs_table.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="/templates-bak/music/genre/song_update.html">song_update.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates-bak/music/search/">search</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/search/indexes/">indexes</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   │   └── <a href="/templates-bak/music/search/indexes/music/">music</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   │   &nbsp;&nbsp;&nbsp; └── <a href="/templates-bak/music/search/indexes/music/album_text.txt">album_text.txt</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/search/album_search.html">album_search.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="/templates-bak/music/search/searchresults.html">searchresults.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates-bak/music/song/">song</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/song/bootstrap-responsive.html">bootstrap-responsive.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/song/hi.html">hi.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/song/song_create.html">song_create.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/song/song_delete.html">song_delete.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/song/song_detail.html">song_detail.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/song/song_filter.html">song_filter.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/song/song_list.html">song_list.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/song/songs.html">songs.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   ├── <a href="/templates-bak/music/song/songs_table.html">songs_table.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── <a href="/templates-bak/music/song/song_update.html">song_update.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates-bak/music/fake-class-tables.html">fake-class-tables.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="/templates-bak/music/fake-index.html">fake-index.html</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="/templates-bak/music/index.html">index.html</a><br>
+	├── <a href="/website/">website</a><br>
+	│   ├── <a href="/website/__pycache__/">__pycache__</a><br>
+	│   │   ├── <a href="/website/__pycache__/filter_mixin.cpython-35.pyc">filter_mixin.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/website/__pycache__/__init__.cpython-35.pyc">__init__.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/website/__pycache__/settings.cpython-35.pyc">settings.cpython-35.pyc</a><br>
+	│   │   ├── <a href="/website/__pycache__/urls.cpython-35.pyc">urls.cpython-35.pyc</a><br>
+	│   │   └── <a href="/website/__pycache__/wsgi.cpython-35.pyc">wsgi.cpython-35.pyc</a><br>
+	│   ├── <a href="/website/filter_mixin.py">filter_mixin.py</a><br>
+	│   ├── <a href="/website/__init__.py">__init__.py</a><br>
+	│   ├── <a href="/website/__init__.pyc">__init__.pyc</a><br>
+	│   ├── <a href="/website/settings.py">settings.py</a><br>
+	│   ├── <a href="/website/settings.pyc">settings.pyc</a><br>
+	│   ├── <a href="/website/urls.py">urls.py</a><br>
+	│   ├── <a href="/website/urls.pyc">urls.pyc</a><br>
+	│   └── <a href="/website/wsgi.py">wsgi.py</a><br>
+	├── <a href="/command.py">command.py</a><br>
+	├── <a href="/gunicorn.log">gunicorn.log</a><br>
+	├── <a href="/manage.py">manage.py</a><br>
+	├── <a href="/mydatabase">mydatabase</a><br>
+	├── <a href="/requirements.txt">requirements.txt</a><br>
+	└── <a href="/tree.txt">tree.txt</a><br>
+	<br><br>
+	</p>
+	<p>
+
+58 directories, 265 files
+	<br><br>
+	</p>
+	<hr>
+	<p class="VERSION">
+		 tree v1.7.0 © 1996 - 2014 by Steve Baker and Thomas Moore <br>
+		 HTML output hacked and copyleft © 1998 by Francesc Rocher <br>
+		 JSON output hacked and copyleft © 2014 by Florian Sesser <br>
+		 Charsets / OS/2 support © 2001 by Kyosuke Tokoro
+	</p>
+</body>
+</html>

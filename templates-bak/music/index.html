@@ -1,0 +1,257 @@
+{% extends 'music/../../../templates/base/base.html' %}
+{% block title %}{{ album }}{% endblock %}
+{% block index_active %}active{% endblock %}
+{% block body %}
+
+    <!-- Dynamic Content -->
+    <div class="albums-container container-fluid">
+
+        <!-- Main Body -->
+        <div class="row">
+            <div class="col-sm-12 title-brand">
+                <h1>Music Manager</h1>
+                <h2>Welcome {{ user.username.title }}</h2>
+                <h5>You have {{ albums_count }} Albums</h5>
+                <h5>You have {{ songs_count }} Songs</h5>
+                <h5>You have {{ artists_count }} Artists</h5>
+{#                <ul>#}
+{#                    {% for url, text in urls %}#}
+{#                        <li><a href="{{ url }}">{{ text }}</a></li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+                <li><a href="{% url 'music:index' %}">Here</a></li>
+                <li><a href="{% url 'music:artists' 'all' %}">artists All</a></li>
+                <li><a href="{% url 'music:artists' 'favorites' %}">artists Fav</a></li>
+{#                <li><a href="{% url 'music:artists_list' %}">artists_list</a></li>#}
+                <li><a href="{% url 'music:albums' 'all' %}">albums All</a></li>
+                <li><a href="{% url 'music:albums' 'favorites' %}">albums Fav</a></li>
+                <li><a href="{% url 'music:albums_list' %}">albums_list</a></li>
+                <li><a href="{% url 'music:songs' 'all' %}">songs All</a></li>
+                <li><a href="{% url 'music:songs' 'favorites' %}">songs Fav</a></li>
+                <li><a href="{% url 'music:songs_list' %}">songs_list</a></li>
+                <li><a href="{% url 'music:create_album'%}">Create Album</a></li>
+                <li><a href="{% url 'music:searchresults'%}">searchresults</a></li>
+                <li><a href="{% url 'music:create_artist'%}">create_artist</a></li>
+                <li><a href="{% url 'music:create_genre'%}">create_genre</a></li>
+                <li><a href="{% url 'music:search'%}">search</a></li>
+                <li><a href="{% url 'music:register'%}">register</a></li>
+                <li><a href="{% url 'music:login_user'%}">login_user</a></li>
+                <li><a href="{% url 'music:logout_user'%}">logout_user</a></li>
+
+            </div>
+        </div>
+
+        <!-- Fav Albums Panel -->
+        <div class="row">
+        <h2>Favourite Albums</h2>
+            {% if user_albums %}
+
+                <!-- Iterate Through Albums-->
+                {% for album in user_albums %}
+
+                    <!-- Panel -->
+                    <div class="col-sm-4 col-lg-2">
+                        <div class="thumbnail">
+
+                            <!-- Album Image to go here -->
+                            <a href="{% url 'music:album_detail' album.id %}"></a>
+
+                            <!-- Main Caption -->
+                            <div class="caption">
+
+                                <!-- Albums Details -->
+                                <h2>{{ album.title }}</h2>
+                                <h4>{{ album.artist }}</h4>
+
+                                <!-- View Details -->
+                                <a href="{% url 'music:album_detail' album.id %}" class="btn btn-primary btn-sm"
+                                   role="button">View
+                                    Details</a>
+
+                                <!-- Delete Album -->
+                                <form action="{% url 'music:delete_album' album.id %}" method="post"
+                                      style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="album_id" value="{{ album.id }}"/>
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+
+                                <!-- Edit -->
+                                <form action="{% url 'music:edit_album' album.id %}" method="post"
+                                      style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="album_id" value="{{ album.id }}"/>
+                                    <button type="submit" class="btn btn-default btn-sm"/>
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                    </button>
+                                </form>
+
+                                <!-- Favorite Album -->
+                                <a href="{% url 'music:fav_album' album.id %}"
+                                   class="btn btn-default btn-sm btn-favorite"
+                                   role="button">
+                                    <span class="glyphicon glyphicon-star {% if album.fav %}active{% endif %}"></span>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ?? -->
+                    {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+                {% endfor %}
+
+            {% else %}
+                <p>There are no albums to show</p>
+
+            {% endif %}
+        </div>
+
+        <!-- Fav Artists Panel -->
+        <div class="row">
+        <h2>Favourite Artists</h2>
+            {% if user_artists%}
+
+                <!-- Iterate Through Artist-->
+                {% for artist in user_artists %}
+
+                    <!-- Panel -->
+                    <div class="col-sm-4 col-lg-2">
+                        <div class="thumbnail">
+
+                            <!-- Artist Image to go here -->
+                            <a href="{% url 'music:artist_detail' artist.id %}"></a>
+
+                            <!-- Main Caption -->
+                            <div class="caption">
+
+                                <!-- Artist Details -->
+                                <h2>{{ artist.name }}</h2>
+                                <h4>{{ artist.genre.all }}</h4>
+
+                                <!-- View Details -->
+                                <a href="{% url 'music:artist_detail' artist.id %}" class="btn btn-primary btn-sm"
+                                   role="button">View
+                                    Details</a>
+
+                                <!-- Delete Artist -->
+                                <form action="{% url 'music:delete_artist' artist.id %}" method="post"
+                                      style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="artist_id" value="{{ artist.id }}"/>
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+
+                                <!-- Edit Artist -->
+                                <form action="{% url 'music:edit_artist' artist.id %}" method="post"
+                                      style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="artist_id" value="{{ artist.id }}"/>
+                                    <button type="submit" class="btn btn-default btn-sm"/>
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                    </button>
+                                </form>
+
+                                <!-- Favorite Artist -->
+                                <a href="{% url 'music:fav_artist' artist.id %}"
+                                   class="btn btn-default btn-sm btn-favorite"
+                                   role="button">
+                                    <span class="glyphicon glyphicon-star {% if artist.fav %}active{% endif %}"></span>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ?? -->
+                    {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+                {% endfor %}
+
+            {% else %}
+                <p>There are no albums to show</p>
+
+            {% endif %}
+        </div>
+
+        <!-- Fav Songs Panel -->
+        <div class="row">
+        <h2>Favourite Songs</h2>
+            {% if user_songs %}
+
+                <!-- Iterate Through Albums-->
+                {% for song in user_songs %}
+
+                    <!-- Panel -->
+                    <div class="col-sm-4 col-lg-2">
+                        <div class="thumbnail">
+
+                            <!-- Songs Image to go here -->
+                            <a href="{% url 'music:song_detail' song.id %}"></a>
+
+                            <!-- Main Caption -->
+                            <div class="caption">
+
+                                <!-- Songs Details -->
+                                <h2>{{ song.title }}</h2>
+                                <h4>{{ song.artist }}</h4>
+
+                                <!-- View Details -->
+                                <a href="{% url 'music:song_detail' song.id %}" class="btn btn-primary btn-sm"
+                                   role="button">View
+                                    Details</a>
+
+                                <!-- Delete Songs -->
+                                <form action="{% url 'music:delete_song' song.id %}" method="post"
+                                      style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="song_id" value="{{ song.id }}"/>
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+
+                                <!-- Edit -->
+                                <form action="{% url 'music:edit_song' song.id %}" method="post"
+                                      style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="song_id" value="{{ song.id }}"/>
+                                    <button type="submit" class="btn btn-default btn-sm"/>
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                    </button>
+                                </form>
+
+                                <!-- Favorite Songs -->
+                                <a href="{% url 'music:fav_song' song.id %}"
+                                   class="btn btn-default btn-sm btn-favorite"
+                                   role="button">
+                                    <span class="glyphicon glyphicon-star {% if song.fav %}active{% endif %}"></span>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ?? -->
+                    {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+                {% endfor %}
+
+            {% else %}
+                <p>There are no albums to show</p>
+
+            {% endif %}
+        </div>
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tree>
+  <directory name=".">
+    <directory name="accounts">
+      <directory name="migrations">
+        <directory name="__pycache__">
+          <file name="__init__.cpython-35.pyc"/>
+        </directory>
+        <file name="__init__.py"/>
+      </directory>
+      <directory name="__pycache__">
+        <file name="forms.cpython-35.pyc"/>
+        <file name="__init__.cpython-35.pyc"/>
+        <file name="tests.cpython-35.pyc"/>
+        <file name="views.cpython-35.pyc"/>
+      </directory>
+      <file name="admin.py"/>
+      <file name="apps.py"/>
+      <file name="forms.py"/>
+      <file name="__init__.py"/>
+      <file name="models.py"/>
+      <file name="tests.py"/>
+      <file name="views.py"/>
+    </directory>
+    <directory name="conf">
+      <directory name="__pycache__">
+        <file name="__init__.cpython-35.pyc"/>
+      </directory>
+      <file name="base.py"/>
+      <file name="__init__.py"/>
+    </directory>
+    <directory name="docs">
+      <file name="data.dump"/>
+      <file name="django-best-practices.pdf"/>
+      <file name="django-filter.pdf"/>
+      <file name="Dockerfile"/>
+      <file name="How to use FreeDB.txt"/>
+      <file name="logstash.conf"/>
+      <file name="README.md"/>
+      <file name="start_gunicorn.sh"/>
+    </directory>
+    <directory name="importer">
+      <directory name="migrations">
+        <directory name="__pycache__">
+          <file name="__init__.cpython-35.pyc"/>
+        </directory>
+        <file name="__init__.py"/>
+      </directory>
+      <directory name="musicimport">
+        <directory name="__pycache__">
+          <file name="file_scraper.cpython-35.pyc"/>
+          <file name="__init__.cpython-35.pyc"/>
+          <file name="mediafile.cpython-35.pyc"/>
+        </directory>
+        <file name="d"/>
+        <file name="db_connect.py"/>
+        <file name="f"/>
+        <file name="file_scraper.py"/>
+        <file name="genres-tree.yaml"/>
+        <file name="genres.txt"/>
+        <file name="id3info.py"/>
+        <file name="id3_tagger.py"/>
+        <file name="__init__.py"/>
+        <file name="mediafile.py"/>
+        <file name="song.mp3"/>
+      </directory>
+      <directory name="__pycache__">
+        <file name="__init__.cpython-35.pyc"/>
+        <file name="urls.cpython-35.pyc"/>
+      </directory>
+      <file name="admin.py"/>
+      <file name="apps.py"/>
+      <file name="__init__.py"/>
+      <file name="models.py"/>
+      <file name="urls.py"/>
+      <file name="views.py"/>
+    </directory>
+    <directory name="music">
+      <directory name="migrations">
+        <directory name="__pycache__">
+          <file name="0001_initial.cpython-35.pyc"/>
+          <file name="0002_auto_20170815_0124.cpython-35.pyc"/>
+          <file name="__init__.cpython-35.pyc"/>
+        </directory>
+        <file name="0001_initial.py"/>
+        <file name="0002_auto_20170815_0124.py"/>
+        <file name="__init__.py"/>
+      </directory>
+      <directory name="__pycache__">
+        <file name="admin.cpython-35.pyc"/>
+        <file name="apps.cpython-35.pyc"/>
+        <file name="filters.cpython-35.pyc"/>
+        <file name="forms.cpython-35.pyc"/>
+        <file name="__init__.cpython-35.pyc"/>
+        <file name="managers.cpython-35.pyc"/>
+        <file name="models.cpython-35.pyc"/>
+        <file name="search_indexes.cpython-35.pyc"/>
+        <file name="tables.cpython-35.pyc"/>
+        <file name="tests.cpython-35.pyc"/>
+        <file name="urls.cpython-35.pyc"/>
+      </directory>
+      <directory name="views">
+        <directory name="__pycache__">
+          <file name="album.cpython-35.pyc"/>
+          <file name="artist.cpython-35.pyc"/>
+          <file name="genre.cpython-35.pyc"/>
+          <file name="__init__.cpython-35.pyc"/>
+          <file name="label.cpython-35.pyc"/>
+          <file name="song.cpython-35.pyc"/>
+          <file name="views.cpython-35.pyc"/>
+        </directory>
+        <file name="album.py"/>
+        <file name="artist.py"/>
+        <file name="genre.py"/>
+        <file name="__init__.py"/>
+        <file name="label.py"/>
+        <file name="song.py"/>
+        <file name="views.py"/>
+      </directory>
+      <file name="admin.py"/>
+      <file name="admin.pyc"/>
+      <file name="apps.py"/>
+      <file name="apps.pyc"/>
+      <file name="command.py"/>
+      <file name="filters.py"/>
+      <file name="forms.py"/>
+      <file name="__init__.py"/>
+      <file name="__init__.pyc"/>
+      <file name="managers.py"/>
+      <file name="models.py"/>
+      <file name="models.pyc"/>
+      <file name="search_indexes.py"/>
+      <file name="signals.py"/>
+      <file name="tables.py"/>
+      <file name="tests.py"/>
+      <file name="urls.py"/>
+    </directory>
+    <directory name="__pycache__">
+      <file name="command.cpython-35.pyc"/>
+    </directory>
+    <directory name="static">
+      <directory name="images">
+        <file name="background.png"/>
+      </directory>
+      <directory name="js">
+        <file name="main.js"/>
+      </directory>
+      <directory name="themes">
+        <directory name="table">
+          <directory name="css">
+            <file name="screen.css"/>
+          </directory>
+          <directory name="img">
+            <file name="arrow-active-down.png"/>
+            <file name="arrow-active-up.png"/>
+            <file name="arrow-inactive-down.png"/>
+            <file name="arrow-inactive-up.png"/>
+            <file name="false.gif"/>
+            <file name="header-bg.png"/>
+            <file name="missing.png"/>
+            <file name="pagination-bg.gif"/>
+            <file name="true.gif"/>
+          </directory>
+        </directory>
+      </directory>
+      <file name="favicon.ico"/>
+      <file name="style.css"/>
+    </directory>
+    <directory name="templates">
+      <directory name="accounts">
+        <file name="forms.html"/>
+        <file name="signup.html"/>
+      </directory>
+      <directory name="admin">
+        <file name="base_site.html"/>
+        <file name="index.html"/>
+      </directory>
+      <directory name="base">
+        <file name="base.html"/>
+        <file name="base_visitor.html"/>
+        <file name="form_template.html"/>
+      </directory>
+      <directory name="music">
+        <directory name="album">
+          <file name="album_create.html"/>
+          <file name="album_delete.html"/>
+          <file name="album_detail_bak.html"/>
+          <file name="album_detail.html"/>
+          <file name="album_filter.html"/>
+          <file name="album_list.html"/>
+          <file name="albums.html"/>
+          <file name="album_table.html"/>
+          <file name="album_update.html"/>
+          <file name="bootstrap-responsive.html"/>
+        </directory>
+        <directory name="artist">
+          <file name="artist_create.html"/>
+          <file name="artist_delete.html"/>
+          <file name="artist_detail.html"/>
+          <file name="artist_edit.html"/>
+          <file name="artist_filter.html"/>
+          <file name="artist_list.html"/>
+          <file name="artists.html"/>
+          <file name="artist_table.html"/>
+          <file name="artist_update.html"/>
+          <file name="bootstrap-responsive.html"/>
+        </directory>
+        <directory name="auth">
+          <file name="login.html"/>
+          <file name="profile.html"/>
+          <file name="register.html"/>
+        </directory>
+        <directory name="base">
+          <file name="album_1col.html"/>
+          <file name="album_2col.html"/>
+          <file name="album_base.html"/>
+          <file name="artist_1col.html"/>
+          <file name="artist_2col.html"/>
+          <file name="artist_base.html"/>
+          <file name="genre_1col.html"/>
+          <file name="genre_2col.html"/>
+          <file name="genre_base.html"/>
+          <file name="label_1col.html"/>
+          <file name="label_2col.html"/>
+          <file name="label_base.html"/>
+          <file name="song_1col.html"/>
+          <file name="song_2col.html"/>
+          <file name="song_base.html"/>
+        </directory>
+        <directory name="genre">
+          <file name="bootstrap-responsive.html"/>
+          <file name="genre_create.html"/>
+          <file name="genre_delete.html"/>
+          <file name="genre_detail.html"/>
+          <file name="genre_filter.html"/>
+          <file name="genre_list.html"/>
+          <file name="genres.html"/>
+          <file name="genre_table.html"/>
+          <file name="genre_update.html"/>
+        </directory>
+        <directory name="label">
+          <file name="bootstrap-responsive.html"/>
+          <file name="label_create.html"/>
+          <file name="label_delete.html"/>
+          <file name="label_detail.html"/>
+          <file name="label_filter.html"/>
+          <file name="label_list.html"/>
+          <file name="labels.html"/>
+          <file name="label_table.html"/>
+          <file name="label_update.html"/>
+        </directory>
+        <directory name="search">
+          <directory name="indexes">
+            <directory name="music">
+              <file name="album_text.txt"/>
+            </directory>
+          </directory>
+          <file name="album_search.html"/>
+          <file name="searchresults.html"/>
+        </directory>
+        <directory name="song">
+          <file name="bootstrap-responsive.html"/>
+          <file name="song_create.html"/>
+          <file name="song_delete.html"/>
+          <file name="song_detail.html"/>
+          <file name="song_filter.html"/>
+          <file name="song_list.html"/>
+          <file name="songs.html"/>
+          <file name="songs_table.html"/>
+          <file name="song_update.html"/>
+        </directory>
+        <file name="fake-class-tables.html"/>
+        <file name="fake-index.html"/>
+        <file name="index.html"/>
+      </directory>
+      <directory name="search">
+        <directory name="indexes">
+          <directory name="music">
+            <file name="album_text.txt"/>
+          </directory>
+        </directory>
+        <file name="album_search.html"/>
+        <file name="search.html"/>
+      </directory>
+    </directory>
+    <directory name="templates-bak">
+      <directory name="music">
+        <directory name="album">
+          <file name="album_create.html"/>
+          <file name="album_delete.html"/>
+          <file name="album_detail_bak.html"/>
+          <file name="album_detail.html"/>
+          <file name="album_filter.html"/>
+          <file name="album_list.html"/>
+          <file name="albums.html"/>
+          <file name="album_table.html"/>
+          <file name="album_update.html"/>
+          <file name="bootstrap-responsive.html"/>
+        </directory>
+        <directory name="artist">
+          <file name="artist_create.html"/>
+          <file name="artist_delete.html"/>
+          <file name="artist_detail.html"/>
+          <file name="artist_edit.html"/>
+          <file name="artist_filter.html"/>
+          <file name="artist_list.html"/>
+          <file name="artists.html"/>
+          <file name="artist_table.html"/>
+          <file name="artist_update.html"/>
+          <file name="bootstrap-responsive.html"/>
+        </directory>
+        <directory name="auth">
+          <file name="login.html"/>
+          <file name="profile.html"/>
+          <file name="register.html"/>
+        </directory>
+        <directory name="base">
+          <file name="base.html"/>
+          <file name="base_visitor.html"/>
+          <file name="form_template.html"/>
+        </directory>
+        <directory name="genre">
+          <file name="album_delete.html"/>
+          <file name="bootstrap-responsive.html"/>
+          <file name="create_genre.html"/>
+          <file name="genre_detail.html"/>
+          <file name="genre_edit.html"/>
+          <file name="genres.html"/>
+          <file name="song_create.html"/>
+          <file name="song_detail.html"/>
+          <file name="song_list.html"/>
+          <file name="songs.html"/>
+          <file name="songs_table.html"/>
+          <file name="song_update.html"/>
+        </directory>
+        <directory name="search">
+          <directory name="indexes">
+            <directory name="music">
+              <file name="album_text.txt"/>
+            </directory>
+          </directory>
+          <file name="album_search.html"/>
+          <file name="searchresults.html"/>
+        </directory>
+        <directory name="song">
+          <file name="bootstrap-responsive.html"/>
+          <file name="hi.html"/>
+          <file name="song_create.html"/>
+          <file name="song_delete.html"/>
+          <file name="song_detail.html"/>
+          <file name="song_filter.html"/>
+          <file name="song_list.html"/>
+          <file name="songs.html"/>
+          <file name="songs_table.html"/>
+          <file name="song_update.html"/>
+        </directory>
+        <file name="fake-class-tables.html"/>
+        <file name="fake-index.html"/>
+        <file name="index.html"/>
+      </directory>
+    </directory>
+    <directory name="website">
+      <directory name="__pycache__">
+        <file name="filter_mixin.cpython-35.pyc"/>
+        <file name="__init__.cpython-35.pyc"/>
+        <file name="settings.cpython-35.pyc"/>
+        <file name="urls.cpython-35.pyc"/>
+        <file name="wsgi.cpython-35.pyc"/>
+      </directory>
+      <file name="filter_mixin.py"/>
+      <file name="__init__.py"/>
+      <file name="__init__.pyc"/>
+      <file name="settings.py"/>
+      <file name="settings.pyc"/>
+      <file name="urls.py"/>
+      <file name="urls.pyc"/>
+      <file name="wsgi.py"/>
+    </directory>
+    <file name="command.py"/>
+    <file name="gunicorn.log"/>
+    <file name="manage.py"/>
+    <file name="mydatabase"/>
+    <file name="requirements.txt"/>
+    <file name="tree.html"/>
+    <file name="tree.xml"/>
+  </directory>
+  <report>
+    <directories>58</directories>
+    <files>266</files>
+  </report>
+</tree>

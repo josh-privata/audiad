@@ -1,0 +1,73 @@
+{% extends 'music/base/artist_1col.html' %}
+
+<!-- Panel  -->
+{% block panel %}
+    {% load widget_tweaks %}
+    {% block content %}
+        <form method="get">
+            <div class="well">
+                <h4 style="margin-top: 0">Filter</h4>
+                <div class="row">
+                   <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.name.label_tag }}
+                        {% render_field filter.form.name class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.realname.label_tag }}
+                        {% render_field filter.form.realname class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.genre.label_tag }}
+                        {% render_field filter.form.genre class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.profile.label_tag }}
+                        {% render_field filter.form.profile class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.discogs_url.label_tag }}
+                        {% render_field filter.form.discogs_url class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.tags.label_tag }}
+                        {% render_field filter.form.tags class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.slug.label_tag }}
+                        {% render_field filter.form.slug class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.country.label_tag }}
+                        {% render_field filter.form.country class="form-control" %}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                </button>
+            </div>
+        </form>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Profile</th>
+                <th>Genre</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in filter.qs %}
+                <tr>
+                    <td>{{ obj.name }}</td>
+                    <td>{{ obj.profile }}</td>
+                    <td>{{ obj.genre }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No data</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+{% endblock %}

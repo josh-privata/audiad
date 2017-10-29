@@ -1,0 +1,71 @@
+{% extends 'music/../../../../templates/base/base.html' %}
+{% block title %}Add a New Song{% endblock %}
+{% block albums_active %}active{% endblock %}
+
+{% block body %}
+
+    <!-- Dynamic Content -->
+    <div class="container-fluid">
+        <div class="row">
+
+{#            <!-- Left Panel -->#}
+{#            <div class="col-sm-4 col-md-3">#}
+{#                <div class="panel panel-default">#}
+{##}
+{#                     <!-- Panel Body -->#}
+{#                    <div class="panel-body">#}
+{#                        <h3>Album</h3>#}
+{#                        {% if error_message %}#}
+{#                            <p><strong>{{ error_message }}</strong></p>#}
+{#                        {% endif %}#}
+{##}
+{#                    <div class="panel-body">#}
+{#                            <a href="{% url 'music:album_detail' album.id %}">#}
+{#                                {% if album.album_logo %}#}
+{#                                    <img src="{{ album.album_logo.url }}" class="img-responsive">#}
+{#                                {% else %}#}
+{#                                    <h3>No image to display</h3>#}
+{#                                {% endif %}#}
+{#                            </a>#}
+{#                        <h1>{{ album.album_title }} <small>{{ album.genre }}</small></h1>#}
+{#                        <h2>{{ album.artist }}</h2>#}
+{##}
+{#                    </div>#}
+{##}
+{#                </div>#}
+{#            </div>#}
+
+            <!-- Right Panel -->
+            <div class="col-sm-8 col-md-9">
+                <div class="panel panel-default">
+
+                    <!-- Panel Body -->
+                    <div class="panel-body">
+                        <h3>Add a New Song</h3>
+                        {% if error_message %}
+                            <p><strong>{{ error_message }}</strong></p>
+                        {% endif %}
+
+                        <!-- Form -->
+                        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="album" value="{{ album }}">
+                            {% include 'music/../../../../templates/base/form_template.html' %}
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+

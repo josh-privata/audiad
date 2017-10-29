@@ -1,0 +1,120 @@
+{% extends 'music/../../../../templates/base/base.html' %}
+{% block title %}All Artists{% endblock %}
+{% block artists_active %}active{% endblock %}
+
+{% block body %}
+
+    <!-- Dynamic Content -->
+    <div class="container-fluid songs-container">
+
+        <!-- Selection Header Panel -->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Selection Header -->
+                <ul class="nav nav-pills" style="margin-bottom: 10px;">
+
+                    <!-- Show All -->
+                    <li role="presentation" {% if filter_by == 'all' %}class="active"{% endif %}><a
+                            href="{% url 'music:artists' 'all' %}">View All</a></li>
+
+                    <!-- Show Favourites -->
+                    <li role="presentation" {% if filter_by == 'favorites' %}class="active"{% endif %}><a
+                            href="{% url 'music:artists' 'favorites' %}">Favorites</a></li>
+
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Panel -->
+                <div class="panel panel-default">
+
+                    <!-- Panel Body -->
+                    <div class="panel-body">
+
+                        <!-- Results Table -->
+                        <table class="table">
+
+                            <!-- Table Head -->
+                            <thead>
+                                <tr>
+                                    <th>Artist</th>
+                                    <th>Favorite</th>
+                                </tr>
+                            </thead>
+        <!-- Right Panel -->
+        {% if artist_list %}
+                            <!-- Table Body -->
+                            <tbody>
+                                {% for artist in artist_list %}
+                                    <tr>
+
+                                        <!-- Artist -->
+                                        <td>
+                                            <a href="{% url 'music:artist_detail' artist.id %}" role="button">{{ artist.name }}</a>
+                                        </td>
+
+                                        <!-- Favorite -->
+                                        <td>
+                                            <a href="{% url 'music:fav_artist' artist.id %}" class="btn-favorite"><span class="glyphicon glyphicon-star {% if artist.fav %}active{% endif %}"></span></a>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+
+ <!-- Pagination -->
+            <div class="albums-container container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% if artist_list.has_other_pages %}
+                            <ul class="pagination">
+                                {% if artist_list.has_previous %}
+                                    <li><a href="?page={{ artist_list.previous_page_number }}">&laquo;</a></li>
+                                {% else %}
+                                    <li class="disabled"><span>&laquo;</span></li>
+                                {% endif %}
+                                {% for i in artist_list.page_range %}
+                                    {% if not i %}
+                                        <li><a href="">...</a></li>
+                                    {% else %}
+                                        {% if artist_list.number == i %}
+                                            <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+                                        {% else %}
+                                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if artist_list.has_next %}
+                                    <li><a href="?page={{ artist_list.next_page_number }}">&raquo;</a></li>
+                                {% else %}
+                                    <li class="disabled"><span>&raquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+                    {% else %}
+            <p>There are no atists to show</p>
+
+        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

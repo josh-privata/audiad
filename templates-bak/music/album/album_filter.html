@@ -1,0 +1,138 @@
+{% extends "music/../../../../templates/base/base.html" %}
+{% block title %}Search Albums{% endblock %}
+{% block albums_active %}active{% endblock %}
+
+{% block body %}
+
+    {% load widget_tweaks %}
+
+    {% block content %}
+        <form method="get">
+            <div class="well">
+                <h4 style="margin-top: 0">Filter</h4>
+                <div class="row">
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.title.label_tag }}
+                        {% render_field filter.form.title class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.artist.label_tag }}
+                        {% render_field filter.form.artist class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.genre.label_tag }}
+                        {% render_field filter.form.genre class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.profile.label_tag }}
+                        {% render_field filter.form.profile class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.style.label_tag }}
+                        {% render_field filter.form.style class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.label.label_tag }}
+                        {% render_field filter.form.label class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.subtitle.label_tag }}
+                        {% render_field filter.form.subtitle class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.date.label_tag }}
+                        {% render_field filter.form.date class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.month.label_tag }}
+                        {% render_field filter.form.month class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.day.label_tag }}
+                        {% render_field filter.form.day class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.year.label_tag }}
+                        {% render_field filter.form.year class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.discogs_url.label_tag }}
+                        {% render_field filter.form.discogs_url class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.tags.label_tag }}
+                        {% render_field filter.form.tags class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.slug.label_tag }}
+                        {% render_field filter.form.slug class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.tracks.label_tag }}
+                        {% render_field filter.form.tracks class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.albumtype.label_tag }}
+                        {% render_field filter.form.albumtype class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.mediums.label_tag }}
+                        {% render_field filter.form.mediums class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.releasegroup_id.label_tag }}
+                        {% render_field filter.form.releasegroup_id class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.catalognum.label_tag }}
+                        {% render_field filter.form.catalognum class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.data_source.label_tag }}
+                        {% render_field filter.form.data_source class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.data_url.label_tag }}
+                        {% render_field filter.form.data_url class="form-control" %}
+                    </div>
+{#                    <div class="form-group col-sm-8 col-md-6">#}
+{#                        {{ filter.form.fav.label_tag }}#}
+{#                        <div>#}
+{#                            {% for choice in filter.form.fav %}#}
+{#                                <label class="checkbox-inline">#}
+{#                                    {{ choice.tag }} {{ choice.choice_label }}#}
+{#                                </label>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                </button>
+            </div>
+        </form>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Genre</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in filter.qs %}
+                <tr>
+                    <td>{{ obj.title }}</td>
+                    <td>{{ obj.artist }}</td>
+                    <td>{{ obj.genre }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No data</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+{% endblock %}

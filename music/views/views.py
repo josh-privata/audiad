@@ -1,58 +1,80 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.db.models import Q
-from django.shortcuts import render
-
-from music.forms import GenreForm, UserForm
+from django.shortcuts import render, render_to_response
+from django.views.generic import TemplateView, ListView
+from haystack.generic_views import SearchView
+from music.filters import AlbumFilter, ArtistFilter, SongFilter
+from music.forms import UserForm, AlbumSearchForm
 from music.tables import *
+from website.filter_mixin import ListFilteredMixin
 
 AUDIO_FILE_TYPES = ['wav', 'mp3', 'ogg']
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 
-def create_genre(request):
-    form = GenreForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        genre = form.save(commit=False)
-        genre.save()
-        all_albums = Album.objects.all()
-        return render(request, 'music/index.html', {'all_albums': all_albums})
-    context = {
-        "form": form,
-    }
-    return render(request, 'music/genre/create_genre.html', context)
+class IndexView(TemplateView):
+
+    template_name = 'music/index.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            return render(request, 'music/auth/login.html')
+        else:
+            return super(IndexView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['artists_count'] = Artist.objects.all().count()
+        context['songs_count'] = Song.objects.all().count()
+        context['albums_count'] = Album.objects.filter(user=self.request.user).count()
+        context['user_albums'] = Album.objects.filter(user=self.request.user, fav=True)
+        context['user_artists'] = Artist.objects.filter(fav=True)
+        context['user_songs'] = Song.objects.filter(fav=True)
+        # context['urls'] = (
+        #             (reverse('tutorial'), 'Tutorial'),
+        #             (reverse('multiple'), 'Multiple tables'),
+        #             (reverse('filtertableview'), 'Filtered tables'),
+        #             (reverse('singletableview'), 'Using SingleTableMixin'),
+        #             (reverse('multitableview'), 'Using MultiTableMixin'),
+        #             (reverse('bootstrap'), 'Using the bootstrap template'),
+        #             (reverse('semantic'), 'Using the Semantic UI template'),
+        #         )
+        return context
 
 
-def index(request):
-    if not request.user.is_authenticated():
-        return render(request, 'music/auth/login.html')
-    else:
-        user_songs = Song.objects.filter(fav=True)
-        user_artists = Artist.objects.filter(fav=True)
-        user_albums = Album.objects.filter(user=request.user, fav=True)
-        albums_count = Album.objects.filter(user=request.user).count()
-        artists_count = Artist.objects.all().count()
-        songs_count = Song.objects.all().count()
-        return render(request, 'music/index.html', {'artists_count': artists_count,
-                                                    'user_albums': user_albums,
-                                                    'user_songs': user_songs,
-                                                    "user_artists": user_artists,
-                                                    'songs_count': songs_count,
-                                                    'albums_count': albums_count})
+class MySearchView(SearchView):
+    """My custom search view."""
+    model = Album
+
+    def get_queryset(self):
+        return super(MySearchView, self).get_queryset().order_by('title')
+        # further filter queryset based on some set of criteria
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MySearchView, self).get_context_data(*args, **kwargs)
+        return context
+
+
+def search(request):
+    form = AlbumSearchForm(request.GET)
+    album = form.search()
+    return render_to_response('search/album_search.html', {'album': album})
 
 
 def searchresults(request):
-    albums = Album.objects.all()
-    artists = Artist.objects.all()
-    songss = Song.objects.all()
     query = request.GET.get("q")
-    albums = albums.filter(Q(title__icontains=query))
-    songss = songss.filter(Q(title__icontains=query))
-    artists = artists.filter(Q(name__icontains=query))
+    albums = Album.objects.all().filter(Q(title__icontains=query))
+    artists = Artist.objects.all().filter(Q(name__icontains=query))
+    songs = Song.objects.all().filter(Q(title__icontains=query))
+    genres = Genre.objects.all().filter(Q(name__icontains=query))
+    labels = Label.objects.all().filter(Q(name__icontains=query))
     return render(request, 'music/search/searchresults.html', {
         'artists': artists,
         'albums': albums,
-        'songs': songss,
+        'songs': songs,
+        'labels': labels,
+        'genres': genres,
     })
 
 
@@ -79,7 +101,24 @@ def login_user(request):
                 return render(request, 'music/auth/login.html', {'error_message': 'Your account has been disabled'})
         else:
             return render(request, 'music/auth/login.html', {'error_message': 'Invalid login'})
-    return render(request, 'music/auth/login.html')
+    else:
+        albums = Album.objects.filter(user=request.user)
+        return render(request, 'music/index.html', {'albums': albums})
+
+
+def filter_album(request):
+    f = AlbumFilter(request.GET, queryset=Album.objects.all())
+    return render(request, 'music/album/album_filter.html', {'filter': f})
+
+
+def filter_song(request):
+    f = SongFilter(request.GET, queryset=Song.objects.all())
+    return render(request, 'music/song/song_filter.html', {'filter': f})
+
+
+def filter_artist(request):
+    f = ArtistFilter(request.GET, queryset=Artist.objects.all())
+    return render(request, 'music/artist/artist_filter.html', {'filter': f})
 
 
 def register(request):

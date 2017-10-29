@@ -2,7 +2,7 @@ from elasticsearch.client import IndicesClient
 from django.conf import settings
 from elasticsearch.helpers import bulk
 from django.core.management.base import BaseCommand
-from music.models import *
+from .music.models import *
 
 
 class Command(BaseCommand):

@@ -27,4 +27,9 @@ class GenreTable(tables.Table):
         model = Genre
         attrs = {'class': 'table table-bordered table-striped table-hover'}
 
+class LabelTable(tables.Table):
+    class Meta:
+        model = Label
+        attrs = {'class': 'table table-bordered table-striped table-hover'}
+
 

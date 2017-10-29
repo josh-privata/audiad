@@ -1,0 +1,77 @@
+{% extends 'music/base/song_1col.html' %}
+
+<!-- Right Panel -->
+{% block panel %}
+    {% load widget_tweaks %}
+    {% block content %}
+        <form method="get">
+            <div class="well">
+                <h4 style="margin-top: 0">Filter</h4>
+                <div class="row">
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.title.label_tag }}
+                        {% render_field filter.form.title class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.artist.label_tag }}
+                        {% render_field filter.form.artist class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.genre.label_tag }}
+                        {% render_field filter.form.genre class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.profile.label_tag }}
+                        {% render_field filter.form.profile class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.style.label_tag }}
+                        {% render_field filter.form.style class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.album.label_tag }}
+                        {% render_field filter.form.album class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.audio_file.label_tag }}
+                        {% render_field filter.form.audio_file class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.last_played.label_tag }}
+                        {% render_field filter.form.last_played class="form-control" %}
+                    </div>
+                    <div class="form-group col-sm-4 col-md-3">
+                        {{ filter.form.length.label_tag }}
+                        {% render_field filter.form.length class="form-control" %}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                </button>
+            </div>
+        </form>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Album</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in filter.qs %}
+                <tr>
+                    <td>{{ obj.title }}</td>
+                    <td>{{ obj.artist.name }}</td>
+                    <td>{{ obj.album.title }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No data</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+{% endblock %}

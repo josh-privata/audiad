@@ -1,3 +1,4 @@
+gunicorn
 django-taggit==0.22.1
 mutagen
 Django==1.11.3
@@ -6,3 +7,9 @@ django-filter
 tablib
 elasticsearch
 logstash
+requests
+django-haystack
+elasticsearch_dsl
+django-digg-paginator
+django-widget-tweaks
+django-mptt

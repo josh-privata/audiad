@@ -2,18 +2,144 @@ from digg_paginator import DiggPaginator as Paginator
 from django.core.paginator import PageNotAnInteger, EmptyPage
 from django.db.models import Q, F
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic import ListView, FormView, DetailView, UpdateView, DeleteView, CreateView
+from django_tables2 import RequestConfig
+from django_tables2.export import TableExport
 from music.forms import AlbumForm
 from music.models import Album, Artist, Song
+from music.tables import AlbumTable
 
 
-def create_album(request):
-    if not request.user.is_authenticated():
-        return render(request, 'music/auth/login.html')
-    else:
-        form = AlbumForm(request.POST or None, request.FILES or None)
-        if form.is_valid():
+class Albums(View):
+
+    def get(self, request, filter_by='all'):
+        if not request.user.is_authenticated():
+            return render(request, 'music/auth/login.html')
+        else:
+            page = request.GET.get('page', 1)
+            try:
+                album_ids = []
+                user_albums = []
+                for album in Album.objects.filter(user=request.user):
+                    album_ids.append(album.pk)
+                    user_albums = Album.objects.filter(pk__in=album_ids)
+                if user_albums:
+                    if filter_by == 'favorites':
+                        user_albums = user_albums.filter(fav=True)
+                paginate_albums = Paginator(user_albums, 20, body=3, margin=1, tail=1)
+                try:
+                    user_albums = paginate_albums.page(page)
+                except PageNotAnInteger:
+                    user_albums = paginate_albums.page(1)
+                except EmptyPage:
+                    user_albums = paginate_albums.page(paginate_albums.num_pages)
+            except Album.DoesNotExist:
+                user_albums = []
+            return render(request, 'music/album/albums.html', {
+                'album_list': user_albums,
+                'filter_by': filter_by,
+            })
+
+
+class AlbumList(ListView):
+
+    template_name = 'music/album/album_table.html'
+    model = Album
+
+    def get_context_data(self, **kwargs):
+        if not self.request.user.is_authenticated():
+            return render(self.request, 'music/auth/login.html')
+        else:
+            user = self.request.user
+            context = super(AlbumList, self).get_context_data(**kwargs)
+            table = AlbumTable(Album.objects.all())
+            table.paginate(page=self.request.GET.get('page', 1), per_page=25)
+            RequestConfig(self.request).configure(table)
+            export_format = self.request.GET.get('_export', None)
+            if TableExport.is_valid_format(export_format):
+                exporter = TableExport(export_format, table)
+                return exporter.response('table.{}'.format(export_format))
+            context['user'] = user
+            context['table'] = table
+            return context
+
+
+class AlbumDetailView(DetailView):
+
+    template_name = 'music/album/album_detail.html'
+    model = Album
+
+    def get_context_data(self, **kwargs):
+        if not self.request.user.is_authenticated():
+            return render(self.request, 'music/auth/login.html')
+        else:
+            user = self.request.user
+            albums = Album.objects.all()
+            artists = Artist.objects.all()
+            songs = Song.objects.all()
+            album = self.object
+            context = super(AlbumDetailView, self).get_context_data(**kwargs)
+            context['album'] = album
+            context['user'] = user
+            if self.object.genre.name:
+                genre = self.object.genre.name
+            context['similar_artist'] = artists.filter(Q(genre__name__icontains=genre)).distinct().exclude(name=album.artist)[:5]
+            context['similar_album'] = albums.filter(Q(genre__name__icontains=genre)).distinct().exclude(title=album.title).filter(artist=F('artist')).distinct()[:5]
+            context['similar_song'] = songs.filter(Q(genre__name__icontains=genre)).distinct().exclude(album=album.id)[:5]
+            return context
+
+
+class AlbumUpdate(UpdateView):
+
+    model = Album
+    form_class = AlbumForm
+    template_name = 'music/album/album_update.html'
+
+    def form_valid(self, form):
+        album = form.save(commit=False)
+        album.user = self.request.user
+        album.save()
+        return super(AlbumUpdate, self).form_valid(form)
+
+
+class AlbumView(FormView):
+
+    template_name = 'music/album/album_create.html'
+    form_class = AlbumForm
+    success_url = '/index/'
+
+    def form_valid(self, form):
+        if not self.request.user.is_authenticated():
+            return render(self.request, 'music/auth/login.html')
+        else:
             album = form.save(commit=False)
-            album.user = request.user
+            album.user = self.request.user
+            album.save()
+            return super(AlbumView, self).form_valid(form)
+
+
+class AlbumDelete(DeleteView):
+
+    model = Album
+    success_url = reverse_lazy('music:albums_list')
+    template_name_suffix = '_delete'
+    template_name = 'music/album/album_delete.html'
+
+
+class AlbumCreate(CreateView):
+
+    model = Album
+    form_class = AlbumForm
+    template_name = 'music/album/album_create.html'
+
+    def form_valid(self, form):
+        if not self.request.user.is_authenticated():
+            return render(self.request, 'music/auth/login.html')
+        else:
+            album = form.save(commit=False)
+            album.user = self.request.user
             #album.cover = request.FILES['cover']
             #file_type = album.cover.url.split('.')[-1]
             #file_type = file_type.lower()
@@ -23,89 +149,19 @@ def create_album(request):
             #        'form': form,
             #        'error_message': 'Image file must be PNG, JPG, or JPEG',
             #    }
-            #    return render(request, 'music/create_album.html', context)
+            #    return render(request, 'music/album_create.html', context)
             album.save()
-            return render(request, 'music/album/album_detail.html', {'album': album})
-        context = {
-            "form": form,
-        }
-        return render(request, 'music/album/create_album.html', context)
-
-
-def delete_album(request, album_id):
-    album = get_object_or_404(Album, pk=album_id)
-    album.delete()
-    albums()
 
 
 def fav_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
-    if album.fav:
-        album.fav = False
-    else:
-        album.fav = True
-    album.save()
-    albums = Album.objects.all()
-    return render(request, 'music/album/albums.html', {'albums': albums})
-
-
-def albums(request, filter_by):
-    if not request.user.is_authenticated():
-        return render(request, 'music/auth/login.html')
-    else:
-        page = request.GET.get('page', 1)
-        try:
-            album_ids = []
-            user_albums = []
-            for album in Album.objects.filter(user=request.user):
-                album_ids.append(album.pk)
-                user_albums = Album.objects.filter(pk__in=album_ids)
-            if user_albums:
-                if filter_by == 'favorites':
-                    user_albums = user_albums.filter(fav=True)
-            paginate_albums = Paginator(user_albums, 20, body=3, margin=1, tail=1)
-            try:
-                user_albums = paginate_albums.page(page)
-            except PageNotAnInteger:
-                user_albums = paginate_albums.page(1)
-            except EmptyPage:
-                user_albums = paginate_albums.page(paginate_albums.num_pages)
-        except Album.DoesNotExist:
-            user_albums = []
-        return render(request, 'music/album/albums.html', {
-            'albums': user_albums,
-            'filter_by': filter_by,
-        })
-
-
-def album_detail(request, album_id):
-    if not request.user.is_authenticated():
-        return render(request, 'music/auth/login.html')
-    else:
-        user = request.user
-        album = get_object_or_404(Album, pk=album_id)
-        albums = Album.objects.all()
-        artists = Artist.objects.all()
-        songss = Song.objects.all()
-        genre = ""
-        if album.genre.name:
-            genre = album.genre.name
-        similar_artist = artists.filter(Q(genre__name__icontains=genre)).distinct().exclude(name=album.artist)[:5]
-        similar_album = albums.filter(Q(genre__name__icontains=genre)).distinct().exclude(title=album.title).filter(artist=F('artist')).distinct()[:5]
-        similar_song = songss.filter(Q(genre__name__icontains=genre)).distinct().exclude(album=album.id)[:5]
-        return render(request, 'music/album/album_detail.html', {'album': album,
-                                                                 'user': user,
-                                                                 'similar_artist': similar_artist,
-                                                                 'similar_album': similar_album,
-                                                                 'similar_song': similar_song})
-
-
-def edit_album(request, album_id):
-    album = Album.objects.get(pk=album_id)
-    form = AlbumForm(instance=album)
-    if form.is_valid():
+    try:
+        if album.fav:
+            album.fav = False
+        else:
+            album.fav = True
         album.save()
-        return render(request, 'music/album/album_detail.html', {
-                               'album': album})
-    return render(request, 'music/album/album_edit.html', {'form': form,
-                                                           'album': album})
+    except (KeyError, Album.DoesNotExist):
+        return JsonResponse({'success': False})
+    else:
+        return JsonResponse({'success': True})

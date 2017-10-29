@@ -1,0 +1,239 @@
+{% extends 'music/base/song_2col.html' %}
+
+<!-- Left Panel -->
+{% block panel1 %}
+    <div class="col-sm-6 col-md-4">
+                <div class="panel panel-default">
+
+                    <!-- Panel Body -->
+                    <div class="panel-body">
+
+                        <!-- Song Cover -->
+                        {% comment %}<a href="{% url 'music:song_detail' song.id %}">
+                            {% if song.cover %}
+                                <img src="{{ song.cover.url }}" class="img-responsive">
+                            {% else %}
+                                <h3>No image to display</h3>
+                            {% endif %}
+                        </a>{% endcomment %}
+
+                        <!-- Song Title -->
+                        <h1>{{ song.title }}
+                            <small>{{ song.genre }}</small>
+                        </h1>
+
+                        <!-- Song Favourite -->
+                        <h2>
+                            <a href="{% url 'music:artist_detail' song.artist.id %}" role="button">{{ song.artist}}</a>
+                            <a href="{% url 'music:fav_album' song.id %}" class="btn-favorite"><span
+                                    class="glyphicon glyphicon-star {% if song.fav %}active{% endif %}"></span></a>
+                        </h2>
+
+                        <!-- Song Details -->
+                        <h4>
+                            <small>{{ song.profile }}</small>
+                        </h4>
+                        <h4>Styles
+                            <small>{{ song.style.name }}</small>
+                        </h4>
+                        <h4>Label
+                            <small>{{ song.label.name }}</small>
+                        </h4>
+                        <h4>Producer
+                            <small>{{ song.producer }}</small>
+                        </h4>
+                        <h4>Track
+                            <small>{{ song.track }}</small>
+                        </h4>
+                        <h4>Length
+                            <small>{{ song.length }}</small>
+                        </h4>
+                        <h4>Audio File
+                            <small>{{ album.audio_file }}</small>
+                        </h4>
+                        <h4>Last Played
+                            <small>{{ album.last_played }}</small>
+                        </h4>
+                        </h4>
+                        <h4>Tags
+                            {% for tag in song.tags.names %}
+                                <small>{{ tag }}, </small>
+                            {% endfor %}
+                        </h4>
+
+                    <!-- Delete -->
+                        <form action="{% url 'music:delete_song' song.id %}" method="post"
+                              style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="song_id" value="{{ song.id }}"/>
+                                <button type="submit" class="btn btn-danger btn-xs"/>
+                                    <span class="glyphicon glyphicon-remove"></span> Delete
+                                </button>
+                            </input>
+                        </form>
+
+                        <!-- Edit -->
+                        <form action="{% url 'music:edit_song' song.id %}" method="post"
+                              style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="song_id" value="{{ song.id }}"/>
+                                <button type="submit" class="btn btn-information btn-xs"/>
+                                    <span class="glyphicon glyphicon-edit"></span> Edit
+                                </button>
+                            </input>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+{% endblock %}
+
+<!-- Right Panel -->
+{% block panel2 %}
+    <div class="col-sm-6 col-md-8">
+
+                <!-- Main Panel -->
+                <div class="panel panel-default">
+
+                    <!-- Panel Body -->
+                    <div class="panel-body">
+
+                        <!-- Report Errors -->
+                        {% if error_message %}
+                            <p><strong>{{ error_message }}</strong></p>
+                        {% endif %}
+
+                        <!-- Similar Albums Table -->
+                        <h3>Similar Albums</h3>
+                        <table class="table">
+
+                            {% if similar_album %}
+                                <!-- Table Head -->
+                                <thead>
+                                <tr>
+                                    <th>Album</th>
+                                    <th>Artist</th>
+                                    <th>Favourite</th>
+                                </tr>
+                                </thead>
+
+                                <!-- Table Body -->
+                                <tbody>
+
+                                    {% for album in similar_album %}
+                                        <tr>
+
+                                            <!-- Album -->
+                                            <td><a href="{% url 'music:album_detail' album.id %}"
+                                                   role="button">{{ album.title }}</a></td>
+
+                                            <!-- Artist -->
+                                            <td><a href="{% url 'music:artist_detail' album.artist.id %}"
+                                                   role="button">{{ album.artist }}</a></td>
+
+                                            <!-- Favorite -->
+                                            <td>
+                                                <a href="{% url 'music:fav_album' album.id %}" class="btn-favorite"><span
+                                                        class="glyphicon glyphicon-star {% if album.fav %}active{% endif %}"></span></a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                            {% else %}
+                                <p>There are no similar albums to show</p>
+                            {% endif %}
+                            </tbody>
+
+                        </table>
+
+                        <!-- Similar Artists Table -->
+                        <h3>Similar Artists</h3>
+                        <table class="table">
+
+                            {% if similar_artist %}
+                                <!-- Table Head -->
+                                <thead>
+                                <tr>
+                                    <th>Artist</th>
+                                    <th>Favourite</th>
+                                </tr>
+                                </thead>
+
+                                <!-- Table Body -->
+                                <tbody>
+                                    {% for artist in similar_artist %}
+                                        <tr>
+
+                                            <!-- Artist -->
+                                            <td><a href="{% url 'music:artist_detail' artist.id %}"
+                                                   role="button">{{ artist.name }}</a></td>
+
+                                            <!-- Favorite -->
+                                            <td>
+                                                <a href="{% url 'music:fav_artist' artist.id %}" class="btn-favorite"><span
+                                                        class="glyphicon glyphicon-star {% if artist.fav %}active{% endif %}"></span></a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                            {% else %}
+                                <p>There are no similar artists to show</p>
+                            {% endif %}
+                            </tbody>
+
+                        </table>
+
+                        <!-- Similar Songs Table -->
+                        <h3>Similar Songs</h3>
+                        <table class="table">
+
+                            {% if similar_song %}
+                                <!-- Table Head -->
+                                <thead>
+                                <tr>
+                                    <th>Song</th>
+                                    <th>Artist</th>
+                                    <th>Album</th>
+                                    <th>Favourite</th>
+                                </tr>
+                                </thead>
+
+                                <!-- Table Body -->
+                                <tbody>
+
+                                {% for song in similar_song %}
+                                    <tr>
+
+                                        <!-- Song -->
+                                        <td><a href="{% url 'music:song_detail' song.id %}"
+                                               role="button">{{ song.title }}</a></td>
+
+                                        <!-- Artist -->
+                                        <td><a href="{% url 'music:artist_detail' song.artist.id %}"
+                                               role="button">{{ song.artist.name }}</a></td>
+
+                                        <!-- Album -->
+                                        <td><a href="{% url 'music:album_detail' song.album.id %}"
+                                               role="button">{{ song.album.name }}</a></td>
+
+                                        <!-- Favorite -->
+                                        <td>
+                                            <a href="{% url 'music:fav_song' song.id %}" class="btn-favorite"><span
+                                                    class="glyphicon glyphicon-star {% if song.fav %}active{% endif %}"></span></a>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <p>There are no similar songs to show</p>
+                            {% endif %}
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+
+    </div>
+{% endblock %}

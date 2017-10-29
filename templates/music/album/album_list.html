@@ -1,0 +1,46 @@
+{% extends 'music/base/album_1col.html' %}
+
+    <!-- Left Panel -->
+{% block panel %}
+    <div class="col-sm-12">
+
+        <h2>Albums</h2>
+        <table class="table">
+
+                <!-- Table Head -->
+                <thead>
+                <tr>
+                    <th>Album</th>
+                    <th>Artist</th>
+                    <th>Favourite</th>
+                </tr>
+                </thead>
+
+                <!-- Table Body -->
+                <tbody>
+
+                {% for album in object_list %}
+                    <tr>
+
+                        <!-- Album -->
+                        <td><a href="{% url 'music:album_detail' album.id %}"
+                               role="button">{{ album.title }}</a></td>
+
+                        <!-- Artist -->
+                        <td><a href="{% url 'music:artist_detail' album.artist.id %}"
+                               role="button">{{ album.artist }}</a></td>
+
+                        <!-- Favorite -->
+                        <td>
+                            <a href="{% url 'music:fav_album' album.id %}" class="btn-favorite"><span
+                                    class="glyphicon glyphicon-star {% if album.fav %}active{% endif %}"></span></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+
+    </div>
+{% endblock %}
