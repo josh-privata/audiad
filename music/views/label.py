@@ -1,3 +1,19 @@
+"""docstrings.
+
+
+Example:
+
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+Todo:
+
+"""
+# todo Finish docstring
+
 from digg_paginator import DiggPaginator as Paginator
 from django.core.paginator import PageNotAnInteger, EmptyPage
 from django.db.models import Q, F
@@ -13,8 +29,33 @@ from music.forms import LabelForm
 
 
 class Labels(View):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     def get(self, request, filter_by='all'):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not request.user.is_authenticated():
             return render(request, 'music/auth/login.html')
         else:
@@ -43,11 +84,36 @@ class Labels(View):
 
 
 class LabelList(ListView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     template_name = 'music/label/label_table.html'
     model = Label
 
     def get_context_data(self, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -66,11 +132,36 @@ class LabelList(ListView):
 
 
 class LabelDetailView(DetailView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     template_name = 'music/label/label_detail.html'
     model = Label
 
     def get_context_data(self, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -83,12 +174,37 @@ class LabelDetailView(DetailView):
 
 
 class LabelUpdate(UpdateView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     model = Label
     form_class = LabelForm
     template_name = 'music/label/label_update.html'
 
     def form_valid(self, form):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         label = form.save(commit=False)
         label.user = self.request.user
         label.save()
@@ -96,12 +212,38 @@ class LabelUpdate(UpdateView):
 
 
 class LabelView(FormView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
+
 
     template_name = 'music/label/label_create.html'
     form_class = LabelForm
     success_url = '/index/'
 
     def form_valid(self, form):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -112,6 +254,17 @@ class LabelView(FormView):
 
 
 class LabelDelete(DeleteView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     model = Label
     success_url = reverse_lazy('music:labels_list')
@@ -120,12 +273,37 @@ class LabelDelete(DeleteView):
 
 
 class LabelCreate(CreateView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     model = Label
     form_class = LabelForm
     template_name = 'music/label/label_create.html'
 
     def form_valid(self, form):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -145,6 +323,20 @@ class LabelCreate(CreateView):
 
 
 def fav_label(request, label_id):
+    """docstring
+
+            Note:
+                Do not include the `self` parameter in the ``Args`` section.
+
+            Args:
+                param1: The first parameter.
+                param2: The second parameter.
+
+            Returns:
+                True if successful, False otherwise.
+
+            """
+    # todo Finish docstring
     label = get_object_or_404(Label, pk=label_id)
     if label.fav:
         label.fav = False

@@ -1,3 +1,19 @@
+"""docstrings.
+
+
+Example:
+
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+Todo:
+
+"""
+# todo Finish docstring
+
 from digg_paginator import DiggPaginator as Paginator
 from django.core.paginator import PageNotAnInteger, EmptyPage
 from django.db.models import Q, F
@@ -13,8 +29,33 @@ from music.forms import GenreForm
 
 
 class Genres(View):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     def get(self, request, filter_by='all'):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not request.user.is_authenticated():
             return render(request, 'music/auth/login.html')
         else:
@@ -43,11 +84,36 @@ class Genres(View):
 
 
 class GenreList(ListView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     template_name = 'music/genre/genre_table.html'
     model = Genre
 
     def get_context_data(self, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -66,11 +132,36 @@ class GenreList(ListView):
 
 
 class GenreDetailView(DetailView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     template_name = 'music/genre/genre_detail.html'
     model = Genre
 
     def get_context_data(self, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -86,12 +177,37 @@ class GenreDetailView(DetailView):
 
 
 class GenreUpdate(UpdateView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     model = Genre
     form_class = GenreForm
     template_name = 'music/genre/genre_update.html'
 
     def form_valid(self, form):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         genre = form.save(commit=False)
         genre.user = self.request.user
         genre.save()
@@ -99,12 +215,37 @@ class GenreUpdate(UpdateView):
 
 
 class GenreView(FormView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     template_name = 'music/genre/genre_create.html'
     form_class = GenreForm
     success_url = '/index/'
 
     def form_valid(self, form):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -115,6 +256,17 @@ class GenreView(FormView):
 
 
 class GenreDelete(DeleteView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     model = Genre
     success_url = reverse_lazy('music:genres_list')
@@ -123,12 +275,37 @@ class GenreDelete(DeleteView):
 
 
 class GenreCreate(CreateView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     model = Genre
     form_class = GenreForm
     template_name = 'music/genre/genre_create.html'
 
     def form_valid(self, form):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -148,6 +325,20 @@ class GenreCreate(CreateView):
 
 
 def fav_genre(request, genre_id):
+    """docstring
+
+            Note:
+                Do not include the `self` parameter in the ``Args`` section.
+
+            Args:
+                param1: The first parameter.
+                param2: The second parameter.
+
+            Returns:
+                True if successful, False otherwise.
+
+            """
+    # todo Finish docstring
     genre = get_object_or_404(Genre, pk=genre_id)
     if genre.fav:
         genre.fav = False

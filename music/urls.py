@@ -9,11 +9,13 @@ from music.views.artist import *
 from music.views.label import *
 from music.views.genre import *
 from haystack.generic_views import SearchView
-
 from music.views.views import IndexView, MySearchView
 from .views import views, song, album, artist, label, genre
 
 app_name = 'music'
+
+# todo Sort URL's to avoid unreachable links
+
 urlpatterns = [
 
     # BASE PAGES ##

@@ -1,3 +1,19 @@
+"""docstrings.
+
+
+Example:
+
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+Todo:
+
+"""
+# todo Finish docstring
+
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -5,22 +21,33 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 from mptt.models import MPTTModel, TreeForeignKey
-
 # from django.db.models.signals musicimport post_save
 # from django.dispatch musicimport receiver
 # from elasticsearch.helpers import scan
 # from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
 import django.db.models.options as options
-
 from music.managers import SongManager
+
+# todo seperate into seperate files
 
 options.DEFAULT_NAMES = options.DEFAULT_NAMES + (
     'es_index_name', 'es_type_name', 'es_mapping', 'es_client'
 )
+"""int: Module level variable documented inline."""
+# todo Finish docstring
+
 ELASTIC_SEARCH_NODES = ['http://localhost:9200']
+"""int: Module level variable documented inline."""
+# todo Finish docstring
+
 INDEX = 'audiad'
+"""int: Module level variable documented inline."""
+# todo Finish docstring
+
 ES_CLIENT = Elasticsearch(ELASTIC_SEARCH_NODES, verify_certs=True, connection_class=RequestsHttpConnection)
+"""int: Module level variable documented inline."""
+# todo Finish docstring
 
 
 # class Profile(models.Model):
@@ -62,6 +89,17 @@ ES_CLIENT = Elasticsearch(ELASTIC_SEARCH_NODES, verify_certs=True, connection_cl
 
 
 class Genre(models.Model):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     name = models.CharField(max_length=100, blank=True, null=True, default=None)
     #parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
     parent = models.ForeignKey('self', blank=True, null=True, default=None)
@@ -121,6 +159,20 @@ class Genre(models.Model):
 
 
     def save(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         # Create slug on object creation
         if not self.id:
             self.slug = slugify(self.name)
@@ -152,6 +204,20 @@ class Genre(models.Model):
         #     )
 
     def delete(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         prev_pk = self.pk
         super(Genre, self).delete(*args, **kwargs)
         # ES_CLIENT.delete(
@@ -162,12 +228,31 @@ class Genre(models.Model):
         # )
 
     def __unicode__(self):
+        """str: Docstring *after* attribute, with type specified."""
+        # todo Finish docstring
         return "Genre Name: {}".format(self.name)
 
     def __str__(self):
+        """str: Docstring *after* attribute, with type specified."""
+        # todo Finish docstring
         return self.name
 
     def es_repr(self):
+        """docstring
+
+        Note:
+            Do not include the `self` parameter in the ``Args`` section.
+
+        Args:
+            param1: The first parameter.
+            param2: The second parameter.
+
+        Returns:
+            True if successful, False otherwise.
+
+        """
+        # todo Finish docstring
+
         data = {}
         mapping = self._meta.es_mapping
         data['_id'] = self.pk
@@ -176,6 +261,20 @@ class Genre(models.Model):
         return data
 
     def field_es_repr(self, field_name):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         config = self._meta.es_mapping['properties'][field_name]
         if hasattr(self, 'get_es_%s' % field_name):
             field_es_value = getattr(self, 'get_es_%s' % field_name)()
@@ -191,6 +290,17 @@ class Genre(models.Model):
 
 
 class Country(models.Model):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     name = models.CharField(max_length=100, blank=True, null=True, default="")
     tags = models.CharField(max_length=250, blank=True, null=True, default="country")
     slug = models.CharField(max_length=250, blank=True, null=True, default=None)
@@ -213,6 +323,20 @@ class Country(models.Model):
         }
 
     def save(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         # Create slug on object creation
         if not self.id:
             self.slug = slugify(self.name)
@@ -244,6 +368,20 @@ class Country(models.Model):
         #     )
 
     def delete(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         prev_pk = self.pk
         super(Country, self).delete(*args, **kwargs)
         # ES_CLIENT.delete(
@@ -254,12 +392,30 @@ class Country(models.Model):
         # )
 
     def __unicode__(self):
+        """str: Docstring *after* attribute, with type specified."""
+        # todo Finish docstring
         return "Country Name: {}".format(self.name)
 
     def __str__(self):
+        """str: Docstring *after* attribute, with type specified."""
+        # todo Finish docstring
         return self.name
 
     def es_repr(self):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         data = {}
         mapping = self._meta.es_mapping
         data['_id'] = self.pk
@@ -268,6 +424,20 @@ class Country(models.Model):
         return data
 
     def field_es_repr(self, field_name):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         config = self._meta.es_mapping['properties'][field_name]
         if hasattr(self, 'get_es_%s' % field_name):
             field_es_value = getattr(self, 'get_es_%s' % field_name)()
@@ -283,6 +453,17 @@ class Country(models.Model):
 
 
 class Style(models.Model):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     name = models.CharField(max_length=100, blank=True, null=True, default=None)
     tags = models.CharField(max_length=250, blank=True, null=True, default="style")
     fav = models.BooleanField(default=False, blank=True)
@@ -305,6 +486,20 @@ class Style(models.Model):
         }
 
     def save(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         # Create slug on object creation
         if not self.id:
             self.slug = slugify(self.name)
@@ -336,6 +531,20 @@ class Style(models.Model):
         #     )
 
     def delete(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         prev_pk = self.pk
         super(Style, self).delete(*args, **kwargs)
         # ES_CLIENT.delete(
@@ -346,12 +555,30 @@ class Style(models.Model):
         # )
 
     def __unicode__(self):
+        """str: Docstring *after* attribute, with type specified."""
+        # todo Finish docstring
         return "Style Name: {}".format(self.name)
 
     def __str__(self):
+        """str: Docstring *after* attribute, with type specified."""
+        # todo Finish docstring
         return self.name
 
     def es_repr(self):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         data = {}
         mapping = self._meta.es_mapping
         data['_id'] = self.pk
@@ -360,6 +587,20 @@ class Style(models.Model):
         return data
 
     def field_es_repr(self, field_name):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         config = self._meta.es_mapping['properties'][field_name]
         if hasattr(self, 'get_es_%s' % field_name):
             field_es_value = getattr(self, 'get_es_%s' % field_name)()
@@ -375,6 +616,17 @@ class Style(models.Model):
 
 
 class Artist(models.Model):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     name = models.CharField(max_length=200, blank=False)
     realname = models.CharField(max_length=200, blank=True, null=True, default=None)
     profile = models.CharField(max_length=2000, blank=True, default="")
@@ -417,7 +669,20 @@ class Artist(models.Model):
         }
 
     def save(self, *args, **kwargs):
-        # Create slug on object creation
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.id:
             self.slug = slugify(self.name)
         #
@@ -448,6 +713,20 @@ class Artist(models.Model):
         #     )
 
     def delete(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         prev_pk = self.pk
         super(Artist, self).delete(*args, **kwargs)
         # ES_CLIENT.delete(
@@ -458,12 +737,31 @@ class Artist(models.Model):
         # )
 
     def __unicode__(self):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
         return "Artist Name: {}".format(self.name)
 
     def __str__(self):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
         return self.name
 
     def es_repr(self):
+        """docstring
+
+        Note:
+            Do not include the `self` parameter in the ``Args`` section.
+
+        Args:
+            param1: The first parameter.
+            param2: The second parameter.
+
+        Returns:
+            True if successful, False otherwise.
+
+        """
+        # todo Finish docstring
+
         data = {}
         mapping = self._meta.es_mapping
         data['_id'] = self.pk
@@ -472,6 +770,20 @@ class Artist(models.Model):
         return data
 
     def field_es_repr(self, field_name):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         config = self._meta.es_mapping['properties'][field_name]
         if hasattr(self, 'get_es_%s' % field_name):
             field_es_value = getattr(self, 'get_es_%s' % field_name)()
@@ -487,6 +799,17 @@ class Artist(models.Model):
 
 
 class Label(models.Model):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     name = models.CharField(max_length=200, blank=True, default=None, null=True)
     discogs_url = models.URLField(max_length=200, blank=True, null=True)
     fav = models.BooleanField(default=False, blank=True)
@@ -540,6 +863,20 @@ class Label(models.Model):
         }
 
     def save(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         # Create slug on object creation
         if not self.id:
             self.slug = slugify(self.name)
@@ -571,6 +908,20 @@ class Label(models.Model):
         #     )
 
     def delete(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         prev_pk = self.pk
         super(Label, self).delete(*args, **kwargs)
         # ES_CLIENT.delete(
@@ -581,12 +932,30 @@ class Label(models.Model):
         # )
 
     def __unicode__(self):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
         return "Label Name: {}".format(self.name)
 
     def __str__(self):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
         return self.name
 
     def es_repr(self):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         data = {}
         mapping = self._meta.es_mapping
         data['_id'] = self.pk
@@ -595,6 +964,20 @@ class Label(models.Model):
         return data
 
     def field_es_repr(self, field_name):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         config = self._meta.es_mapping['properties'][field_name]
         if hasattr(self, 'get_es_%s' % field_name):
             field_es_value = getattr(self, 'get_es_%s' % field_name)()
@@ -610,6 +993,17 @@ class Label(models.Model):
 
 
 class Album(models.Model):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     user = models.ForeignKey(User, default=1)
     profile = models.CharField(max_length=2000, blank=True, default="")
     artist = models.ForeignKey(Artist, on_delete=models.DO_NOTHING, blank=True, default=None)
@@ -706,6 +1100,20 @@ class Album(models.Model):
         }
 
     def save(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         # Create slug on object creation
         if not self.id:
             self.slug = slugify(self.title)
@@ -735,6 +1143,20 @@ class Album(models.Model):
         #     )
 
     def delete(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         prev_pk = self.pk
         super(Album, self).delete(*args, **kwargs)
         # ES_CLIENT.delete(
@@ -745,15 +1167,35 @@ class Album(models.Model):
         # )
 
     def get_absolute_url(self):
+        """str: Docstring *after* attribute, with type specified."""
+        # todo Finish docstring
         return reverse('album-detail', kwargs={'pk': self.pk})
 
     def __unicode__(self):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
         return "Album Title: {}".format(self.title)
 
     def __str__(self):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
         return self.title
 
     def es_repr(self):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         data = {}
         mapping = self._meta.es_mapping
         data['_id'] = self.pk
@@ -762,6 +1204,20 @@ class Album(models.Model):
         return data
 
     def field_es_repr(self, field_name):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         config = self._meta.es_mapping['properties'][field_name]
         if hasattr(self, 'get_es_%s' % field_name):
             field_es_value = getattr(self, 'get_es_%s' % field_name)()
@@ -776,12 +1232,37 @@ class Album(models.Model):
         return field_es_value
 
     def get_es_style(self):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.style.exists():
             return []
         return [c.style.name for c in self.style.all()]
 
 
 class Song(models.Model):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     genre = models.ForeignKey(Genre, blank=True, on_delete=models.CASCADE)
@@ -817,7 +1298,6 @@ class Song(models.Model):
     objects = SongManager()
 
     class Meta:
-
 
         # Elastic Search Details
         es_index_name = INDEX
@@ -896,6 +1376,20 @@ class Song(models.Model):
         }
 
     def save(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         # Create slug on object creation
         if not self.id:
             self.slug = slugify(self.name)
@@ -927,6 +1421,20 @@ class Song(models.Model):
         #     )
 
     def delete(self, *args, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         prev_pk = self.pk
         super(Song, self).delete(*args, **kwargs)
         # ES_CLIENT.delete(
@@ -937,12 +1445,31 @@ class Song(models.Model):
         # )
 
     def __unicode__(self):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
         return "Item Title: {}".format(self.title)
 
     def __str__(self):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
+
         return self.title
 
     def es_repr(self):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         data = {}
         mapping = self._meta.es_mapping
         data['_id'] = self.pk
@@ -951,6 +1478,20 @@ class Song(models.Model):
         return data
 
     def field_es_repr(self, field_name):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         config = self._meta.es_mapping['properties'][field_name]
         if hasattr(self, 'get_es_%s' % field_name):
             field_es_value = getattr(self, 'get_es_%s' % field_name)()
@@ -965,6 +1506,20 @@ class Song(models.Model):
         return field_es_value
 
     def get_es_style(self):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.style.exists():
             return []
         return [c.style.name for c in self.style.all()]
@@ -976,6 +1531,17 @@ class Song(models.Model):
 
 
 # class MP3Tag(models.Model):
+"""docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+"""
+# todo Finish docstring
 #     title = models.CharField(max_length=250, null=True, blank=True, default="")
 #     author = models.CharField(max_length=250, null=True, blank=True, default="")
 #     artist = models.CharField(max_length=250, null=True, blank=True, default="")

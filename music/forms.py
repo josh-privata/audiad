@@ -1,11 +1,37 @@
+"""docstrings.
+
+
+Example:
+
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+Todo:
+
+"""
+# todo Finish docstring
+
 from django import forms
 from django.contrib.auth.models import User
 from haystack.forms import SearchForm
-
 from .models import Album, Song, Artist, Genre, Label
 
 
 class UserForm(forms.ModelForm):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
@@ -14,6 +40,17 @@ class UserForm(forms.ModelForm):
 
 
 class AlbumSearchForm(SearchForm):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     title = forms.CharField()
     artist = forms.CharField()
 
@@ -23,6 +60,20 @@ class AlbumSearchForm(SearchForm):
                   'year', 'cover', 'discogs_url', 'fav', 'tags']
 
     def search(self):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         # First, store the SearchQuerySet received from other processing.
         sqs = super(AlbumSearchForm, self).search()
         if not self.is_valid():
@@ -32,6 +83,20 @@ class AlbumSearchForm(SearchForm):
         return sqs
 
     def no_query_found(self):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         return self.searchqueryset.all()
 
 
@@ -42,6 +107,18 @@ class AlbumSearchForm(SearchForm):
 
 
 class AlbumForm(forms.ModelForm):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+
+    # todo Finish docstring
     class Meta:
         model = Album
         fields = ['artist', 'title', 'genre', 'subtitle', 'producer', 'date',
@@ -49,30 +126,90 @@ class AlbumForm(forms.ModelForm):
 
 
 class SongForm1(forms.ModelForm):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+
+    # todo Finish docstring
     class Meta:
         model = Song
         fields = ['title', 'artist', 'tags']
 
 
 class ArtistForm(forms.ModelForm):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
+
     class Meta:
         model = Artist
         fields = ['name', 'discogs_url', 'fav', 'tags']
 
 
 class GenreForm(forms.ModelForm):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+
+    # todo Finish docstring
     class Meta:
         model = Genre
         fields = ['name', 'fav', 'tags']
 
 
 class LabelForm(forms.ModelForm):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
+
     class Meta:
         model = Label
         fields = ['name', 'fav', 'tags']
 
 
 class SongForm2(forms.ModelForm):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+
+    # todo Finish docstring
     class Meta:
         model = Song
         fields = ('title', 'artist', 'album', 'track', 'fav', 'length',
@@ -80,6 +217,17 @@ class SongForm2(forms.ModelForm):
 
 
 # class MP3Form(forms.ModelForm):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 #     class Meta:
 #         model = mp3tag
 #         fields = ('tracknumber', 'discnumber', 'totaldiscs', 'totaltracks', 'title',

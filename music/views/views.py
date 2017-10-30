@@ -1,3 +1,19 @@
+"""docstrings.
+
+
+Example:
+
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+Todo:
+
+"""
+# todo Finish docstring
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.db.models import Q
@@ -10,14 +26,42 @@ from music.tables import *
 from website.filter_mixin import ListFilteredMixin
 
 AUDIO_FILE_TYPES = ['wav', 'mp3', 'ogg']
-IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
+"""int: Module level variable documented inline."""
+# todo Finish docstring
 
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
+"""int: Module level variable documented inline."""
+# todo Finish docstring
 
 class IndexView(TemplateView):
+    """docstring
 
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
     template_name = 'music/index.html'
 
     def dispatch(self, request, *args, **kwargs):
+        """docstring
+
+        Note:
+            Do not include the `self` parameter in the ``Args`` section.
+
+        Args:
+            param1: The first parameter.
+            param2: The second parameter.
+
+        Returns:
+            True if successful, False otherwise.
+
+        """
+        # todo Finish docstring
         if not request.user.is_authenticated():
             return render(request, 'music/auth/login.html')
         else:
@@ -44,25 +88,67 @@ class IndexView(TemplateView):
 
 
 class MySearchView(SearchView):
-    """My custom search view."""
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
     model = Album
 
     def get_queryset(self):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
         return super(MySearchView, self).get_queryset().order_by('title')
         # further filter queryset based on some set of criteria
 
     def get_context_data(self, *args, **kwargs):
+        """str: Properties should be documented in their getter method."""
+        # todo Finish docstring
         context = super(MySearchView, self).get_context_data(*args, **kwargs)
         return context
 
 
 def search(request):
+    """docstring
+
+            Note:
+                Do not include the `self` parameter in the ``Args`` section.
+
+            Args:
+                param1: The first parameter.
+                param2: The second parameter.
+
+            Returns:
+                True if successful, False otherwise.
+
+            """
+    # todo Finish docstring
     form = AlbumSearchForm(request.GET)
     album = form.search()
     return render_to_response('search/album_search.html', {'album': album})
 
 
 def searchresults(request):
+    """docstring
+
+            Note:
+                Do not include the `self` parameter in the ``Args`` section.
+
+            Args:
+                param1: The first parameter.
+                param2: The second parameter.
+
+            Returns:
+                True if successful, False otherwise.
+
+            """
+    # todo Finish docstring
     query = request.GET.get("q")
     albums = Album.objects.all().filter(Q(title__icontains=query))
     artists = Artist.objects.all().filter(Q(name__icontains=query))
@@ -79,6 +165,20 @@ def searchresults(request):
 
 
 def logout_user(request):
+    """docstring
+
+            Note:
+                Do not include the `self` parameter in the ``Args`` section.
+
+            Args:
+                param1: The first parameter.
+                param2: The second parameter.
+
+            Returns:
+                True if successful, False otherwise.
+
+            """
+    # todo Finish docstring
     logout(request)
     form = UserForm(request.POST or None)
     context = {
@@ -88,6 +188,20 @@ def logout_user(request):
 
 
 def login_user(request):
+    """docstring
+
+            Note:
+                Do not include the `self` parameter in the ``Args`` section.
+
+            Args:
+                param1: The first parameter.
+                param2: The second parameter.
+
+            Returns:
+                True if successful, False otherwise.
+
+            """
+    # todo Finish docstring
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -107,21 +221,41 @@ def login_user(request):
 
 
 def filter_album(request):
+    """str: Properties should be documented in their getter method."""
+    # todo Finish docstring
     f = AlbumFilter(request.GET, queryset=Album.objects.all())
     return render(request, 'music/album/album_filter.html', {'filter': f})
 
 
 def filter_song(request):
+    """str: Properties should be documented in their getter method."""
+    # todo Finish docstring
     f = SongFilter(request.GET, queryset=Song.objects.all())
     return render(request, 'music/song/song_filter.html', {'filter': f})
 
 
 def filter_artist(request):
+    """str: Properties should be documented in their getter method."""
+    # todo Finish docstring
     f = ArtistFilter(request.GET, queryset=Artist.objects.all())
     return render(request, 'music/artist/artist_filter.html', {'filter': f})
 
 
 def register(request):
+    """docstring
+
+            Note:
+                Do not include the `self` parameter in the ``Args`` section.
+
+            Args:
+                param1: The first parameter.
+                param2: The second parameter.
+
+            Returns:
+                True if successful, False otherwise.
+
+            """
+    # todo Finish docstring
     form = UserForm(request.POST or None)
     if form.is_valid():
         user = form.save(commit=False)

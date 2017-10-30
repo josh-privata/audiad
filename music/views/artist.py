@@ -1,3 +1,19 @@
+"""docstrings.
+
+
+Example:
+
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+Todo:
+
+"""
+# todo Finish docstring
+
 from digg_paginator import DiggPaginator as Paginator
 from django.core.paginator import PageNotAnInteger, EmptyPage
 from django.db.models import Q, F
@@ -13,8 +29,33 @@ from music.models import Album, Artist, Song
 
 
 class Artists(View):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     def get(self, request, filter_by='all'):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not request.user.is_authenticated():
             return render(request, 'music/auth/login.html')
         else:
@@ -43,11 +84,36 @@ class Artists(View):
 
 
 class ArtistDetailView(DetailView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     template_name = 'music/artist/artist_detail.html'
     model = Artist
 
     def get_context_data(self, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -69,12 +135,37 @@ class ArtistDetailView(DetailView):
 
 
 class ArtistUpdate(UpdateView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     model = Artist
     form_class = ArtistForm
     template_name = 'music/artist/artist_update.html'
 
     def form_valid(self, form):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         artist = form.save(commit=False)
         artist.user = self.request.user
         artist.save()
@@ -82,6 +173,17 @@ class ArtistUpdate(UpdateView):
 
 
 class ArtistDelete(DeleteView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     model = Artist
     success_url = reverse_lazy('music:artists_list')
@@ -90,12 +192,37 @@ class ArtistDelete(DeleteView):
 
 
 class ArtistCreate(CreateView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     model = Artist
     form_class = ArtistForm
     template_name = 'music/artist/artist_create.html'
 
     def form_valid(self, form):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -105,12 +232,37 @@ class ArtistCreate(CreateView):
 
 
 class ArtistView(FormView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     template_name = 'music/artist/artist_create.html'
     form_class = ArtistForm
     success_url = '/index/'
 
     def form_valid(self, form):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -121,11 +273,36 @@ class ArtistView(FormView):
 
 
 class ArtistList(ListView):
+    """docstring
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    """
+    # todo Finish docstring
 
     template_name = 'music/artist/artist_table.html'
     model = Artist
 
     def get_context_data(self, **kwargs):
+        """docstring
+
+                Note:
+                    Do not include the `self` parameter in the ``Args`` section.
+
+                Args:
+                    param1: The first parameter.
+                    param2: The second parameter.
+
+                Returns:
+                    True if successful, False otherwise.
+
+                """
+        # todo Finish docstring
         if not self.request.user.is_authenticated():
             return render(self.request, 'music/auth/login.html')
         else:
@@ -144,6 +321,20 @@ class ArtistList(ListView):
 
 
 def fav_artist(request, artist_id):
+    """docstring
+
+            Note:
+                Do not include the `self` parameter in the ``Args`` section.
+
+            Args:
+                param1: The first parameter.
+                param2: The second parameter.
+
+            Returns:
+                True if successful, False otherwise.
+
+            """
+    # todo Finish docstring
     artist = get_object_or_404(Artist, pk=artist_id)
     if artist.fav:
         artist.fav = False

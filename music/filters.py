@@ -1,8 +1,35 @@
+"""docstrings.
+
+
+Example:
+
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+Todo:
+
+"""
+# todo Finish docstring
+
 import django_filters
 from .models import Album, Artist, Song, Genre, Label
 
 
 class AlbumFilter(django_filters.FilterSet):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     title = django_filters.CharFilter(lookup_expr='icontains')
     artist = django_filters.CharFilter(name='artist__name', lookup_expr='icontains')
     genre = django_filters.CharFilter(name='genre__name', lookup_expr='icontains')
@@ -32,6 +59,17 @@ class AlbumFilter(django_filters.FilterSet):
 
 
 class ArtistFilter(django_filters.FilterSet):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     title = django_filters.CharFilter(lookup_expr='icontains')
     style = django_filters.CharFilter(lookup_expr='icontains')
     genre = django_filters.CharFilter(name='genre__name', lookup_expr='icontains')
@@ -50,6 +88,17 @@ class ArtistFilter(django_filters.FilterSet):
 
 
 class SongFilter(django_filters.FilterSet):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     name = django_filters.CharFilter(lookup_expr='icontains')
     artist = django_filters.CharFilter(name='artist__name', lookup_expr='icontains')
     album = django_filters.CharFilter(name='album__title', lookup_expr='icontains')
@@ -66,6 +115,17 @@ class SongFilter(django_filters.FilterSet):
 
 
 class GenreFilter(django_filters.FilterSet):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     name = django_filters.CharFilter(lookup_expr='icontains')
     tags = django_filters.CharFilter(lookup_expr='icontains')
     slug = django_filters.CharFilter(lookup_expr='icontains')
@@ -77,6 +137,17 @@ class GenreFilter(django_filters.FilterSet):
 
 
 class LabelFilter(django_filters.FilterSet):
+    """docstring
+
+        Properties created with the ``@property`` decorator should be documented
+        in the property's getter method.
+
+        Attributes:
+            attr1 (str): Description of `attr1`.
+            attr2 (:obj:`int`, optional): Description of `attr2`.
+
+        """
+    # todo Finish docstring
     name = django_filters.CharFilter(lookup_expr='icontains')
     tags = django_filters.CharFilter(lookup_expr='icontains')
     slug = django_filters.CharFilter(lookup_expr='icontains')
