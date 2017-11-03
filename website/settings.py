@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'haystack',
     'widget_tweaks',
     'mptt',
-    'blog.apps.BlogConfig',
     'music.apps.MusicConfig',
     'django.contrib.admin',
     'django.contrib.auth',
