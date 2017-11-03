@@ -5,7 +5,7 @@ python:
 
 #commands to install dependencies
 install:
-  - pip install -q Django==$DJANGO
+  - pip install -q Django==1.11
   - pip install -q -r requirements.txt
 
 
