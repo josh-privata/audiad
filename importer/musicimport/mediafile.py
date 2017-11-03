@@ -101,6 +101,7 @@ class FileTypeError(UnreadableFileError):
             msg = u'{0}: of mutagen type {1}'.format(repr(path), mutagen_type)
         Exception.__init__(self, msg)
 
+
 class MutagenError(UnreadableFileError):
     """Raised when Mutagen fails unexpectedly---probably due to a bug.
     """
