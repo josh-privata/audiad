@@ -1,13 +1,28 @@
+# Python bytecode:
+*.py[co]
 
-/.idea/
-/mydatabase
-/media/
-/music/__init__.pyc
-/music/__pycache__/
-/music/admin.pyc
-/music/apps.pyc
-/music/migrations/__pycache__/
-/music/models.pyc
-/.gitignore
-blog/__pycache__/
-blog/migrations/__pycache__/
+# Packaging files:
+*.egg*
+
+# Editor temp files:
+*.swp
+*~
+
+# Sphinx docs:
+build
+
+# SQLite3 database files:
+*.db
+*.sqlite
+
+# Editor files
+.project
+.idea/*
+__MACOSX/*
+.ropeproject
+.coverage
+
+# Other
+.DS_Store
+bower_components/
+static_root/
