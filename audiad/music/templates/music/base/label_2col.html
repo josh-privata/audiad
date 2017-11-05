@@ -1,0 +1,21 @@
+{% extends 'music/base/label_base.html' %}
+
+{% block body %}
+
+    <!-- Dynamic Content -->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Left Panel -->
+            {% block panel1 %}
+            {% endblock %}
+
+            <!-- Right Panel -->
+            {% block panel2 %}
+            {% endblock %}
+
+
+        </div>
+    </div>
+
+{% endblock %}

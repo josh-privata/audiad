@@ -5,16 +5,9 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 
 
-admin.autodiscover()
-
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html')),
-    url(r'^album/', include('audiad.album.urls', namespace='album')),
-    url(r'^artist/', include('audiad.artist.urls', namespace='artist')),
-    url(r'^song/', include('audiad.song.urls', namespace='song')),
-    url(r'^common/', include('audiad.common.urls', namespace='common')),
-    url(r'^importer/', include('audiad.importer.urls', namespace='importer')),
-    url(r'^search/', include('audiad.search.urls', namespace='search')),
+    url(r'^music/', include('music.urls', namespace='music')),
     url(r'^admin/', include(admin.site.urls)),
 ]
 

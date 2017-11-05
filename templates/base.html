@@ -1,60 +1,162 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
+    <!-- Head -->
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}{% endblock %}</title>
-
-        <!-- Bootstrap -->
-        <link href="{% static "bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
-        <link href="{% static "bootstrap/dist/css/bootstrap-theme.min.css" %}" rel="stylesheet">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        {% block extra_head %}
-        {% endblock %}
+        <meta charset="UTF-8">
+        <title>{% block title %}Audiad{% endblock %}</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+        <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'themes/table/css/screen.css' %}" />
     </head>
+
+    <!-- Body -->
     <body>
-        <div class="navbar navbar-inverse" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="/">Audiad</a>
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse">
+
+            <!-- Header Bar -->
+            <div class="container-fluid">
+
+                <!-- Index Link -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="nav navbar-brand" href="{% url 'music:index' %}">Audiad</a>
+                </div>
+
+                <!-- Menu Items -->
+                <div class="collapse navbar-collapse" id="topNavBar">
+
+                    <!-- Albums -->
+                    <ul class="nav navbar-nav">
+                        <li class="{% block albums_active %}{% endblock %}"><a href="{% url 'music:albums' 'all' %}"><span
+                                class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp; Albums</a></li>
+                    </ul>
+
+                    <!-- Songs -->
+                    <ul class="nav navbar-nav">
+                        <li class="{% block songs_active %}{% endblock %}"><a href="{% url 'music:songs' 'all' %}"><span
+                                class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp; Songs</a></li>
+                    </ul>
+
+                    <!-- Artists -->
+                    <ul class="nav navbar-nav">
+                        <li class="{% block artists_active %}{% endblock %}"><a href="{% url 'music:artists' 'all' %}"><span
+                                class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp; Artists</a></li>
+                    </ul>
+
+                    <!-- Genres -->
+{#                    <ul class="nav navbar-nav">#}
+{#                        <li class="{% block genres_active %}{% endblock %}"><a href="{% url 'music:genres' 'all' %}"><span#}
+{#                                class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp; Genres</a></li>#}
+{#                    </ul>#}
+
+                    <!-- Labels -->
+{#                    <ul class="nav navbar-nav">#}
+{#                        <li class="{% block labels_active %}{% endblock %}"><a href="{% url 'music:labels' 'all' %}"><span#}
+{#                                class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp; Labels</a></li>#}
+{#                    </ul>#}
+
+                    <!-- Search -->
+                    <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'music:searchresults' %}">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                        </div>
+                        <button type="submit" class="btn btn-default">Search</button>
+                    </form>
+
+                    <!-- Right Menu-->
+                    <ul class="nav navbar-nav navbar-right">
+
+{#                        <!-- Add Artist -->#}
+{#                        <li>#}
+{#                            <a href="{% url 'music:create_artist' %}">#}
+{#                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Artist#}
+{#                            </a>#}
+{#                        </li>#}
+{##}
+{#                        <!-- Add Genre -->#}
+{#                        <li>#}
+{#                            <a href="{% url 'music:create_genre' %}">#}
+{#                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Genre#}
+{#                            </a>#}
+{#                        </li>#}
+{##}
+{#                        <!-- Add Album -->#}
+{#                        <li>#}
+{#                            <a href="{% url 'music:create_album' %}">#}
+{#                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Album#}
+{#                            </a>#}
+{#                        </li>#}
+                        <li>
+                            <a href="{% url 'music:logout_user' %}">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="{% url 'album:list' %}">List</a></li>
-                <li><a href="{% url 'album:create' %}">Create</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </div>
-        <div class="container">
-            <h1>{% block heading %}{% endblock %}</h1>
-            {% block content %}
-            {% endblock %}
-        </div>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="{% static "jquery/dist/jquery.min.js" %}"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
+        </nav>
 
-        {% block extra_script %}
+        <!-- Dynamic Content -->
+        {% block body %}
         {% endblock %}
-    </body>
-</html>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        {% comment %} ## Bootstrap 4.0 (unstable)
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        {% endcomment %}
+        <!-- Sentry JS SDK 2.1.+ required -->
+        <script src="https://cdn.ravenjs.com/2.1.0/raven.min.js"></script>
 
+        {% if request.sentry.id %}
+          <script>
+          Raven.showReportDialog({
+            // grab the eventId generated by the Sentry SDK
+            eventId: '{{ request.sentry.id }}',
+
+            // use the public DSN (dont include your secret!)
+            dsn: 'https://1c89626d8e02478e972af34e31360744@sentry.io/240094'
+          });
+          </script>
+
+
+        <script>
+        // configure the SDK as you normally would
+        Raven.config('https://1c89626d8e02478e972af34e31360744@sentry.io/240094').install();
+
+        /**
+         * Report a routing error to Sentry and show a feedback dialog to
+         * the user.
+         *
+         * > try {
+         * >   renderRoute()
+         * > } catch (err) {
+         * >   handleRouteError(err);
+         * > }
+         */
+        function handleRouteError(err) {
+          Raven.captureException(err);
+          Raven.showReportDialog();
+        };
+        </script>
+        {% endif %}
+
+    </body>
+
+
+</html>

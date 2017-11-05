@@ -1,0 +1,26 @@
+{% extends 'music/base/artist_1col.html' %}
+
+<!-- Panel  -->
+{% block panel %}
+    <div class="col-sm-8 col-md-9">
+                <div class="panel panel-default">
+
+                    <!-- Panel Body -->
+                    <div class="panel-body">
+                        <h3>{{ artist.name }}</h3>
+
+                        <!-- Error Reporting -->
+                        {% if error_message %}
+                            <p><strong>{{ error_message }}</strong></p>
+                        {% endif %}
+
+                        <form action="" method="post">{% csrf_token %}
+                            <p>Are you sure you want to delete "{{ object }}"?</p>
+                            <input type="submit" value="Confirm" />
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+{% endblock %}

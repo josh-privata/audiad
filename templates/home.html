@@ -1,7 +1,22 @@
-{% extends "base.html" %}
+{% extends "base_visitor.html" %}
+{% block title %}Welcome to Audiad{% endblock %}
+{% block body %}
 
-{% block heading %}Home{% endblock %}
+    <!-- Dynamic Content -->
+    <div class="albums-container container-fluid">
+        <!-- Main Body -->
+        <div class="row">
+            <div class="col-sm-12 title text-center">
 
-{% block content %}
-{% endblock content %}
+                {#todo change main page depending on login status#}
+                <h1>Welcome to Audiad</h1>
+                <br><br>
+                <h2><a href="{% url 'music:register' %}">register</a></h2>
+                <h2><a href="{% url 'music:login_user' %}">login</a></h2>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
 

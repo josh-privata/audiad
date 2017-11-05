@@ -1,0 +1,118 @@
+{% extends 'music/base/label_2col.html' %}
+
+<!-- Left Panel -->
+{% block panel1 %}
+    <div class="row">
+        <div class="col-sm-12">
+
+            <!-- Selection Header -->
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+
+                <!-- Show All -->
+                <li role="presentation" {% if filter_by == 'all' %}class="active"{% endif %}><a
+                        href="{% url 'music:labels' 'all' %}">View All</a></li>
+
+                <!-- Show Favourites -->
+                <li role="presentation" {% if filter_by == 'favorites' %}class="active"{% endif %}><a
+                        href="{% url 'music:labels' 'favorites' %}">Favorites</a></li>
+            </ul>
+
+        </div>
+    </div>
+{% endblock %}
+
+<!-- Right Panel -->
+{% block panel2 %}
+    {% if label_list %}
+        <!-- Iterate Through Labels -->
+        {% for label in label_list %}
+
+            <!-- Panel -->
+            <div class="col-sm-4 col-lg-2">
+                <div class="thumbnail">
+
+                     <!-- Main Caption -->
+                    <div class="caption">
+
+                        <!-- Label -->
+                        <h2>{{ label.name }}</h2>
+
+                        <!-- Label Details -->
+                        <a href="{% url 'music:label_detail' label.id %}" class="btn btn-primary btn-sm"
+                           role="button">View
+                            Details</a>
+
+                        <!-- Delete Label -->
+                        <!-- Uses POST -->
+                        <form action="{% url 'music:delete_label' label.id %}" method="post"
+                              style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="label_id" value="{{ label.id }}"/>
+                            <button type="submit" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </form>
+
+                        <!-- Edit Label -->
+                        <!-- Uses GET -->
+                        <form action="{% url 'music:edit_label' label.id %}" method="get"
+                              style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="label_id" value="{{ label.id }}"/>
+                            <button type="submit" class="btn btn-default btn-sm"/>
+                            <span class="glyphicon glyphicon-edit"></span>
+                            </button>
+                        </form>
+
+                        <!-- Favorite Label -->
+                        <a href="{% url 'music:fav_label' label.id %}" class="btn btn-default btn-sm btn-favorite"
+                           role="button">
+                            <span class="glyphicon glyphicon-star {% if label.fav %}active{% endif %}"></span>
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ?? -->
+            {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+        {% endfor %}
+
+        <!-- Pagination -->
+        <div class="label-container container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    {% if label.has_other_pages %}
+                        <ul class="pagination">
+                            {% if label.has_previous %}
+                                <li><a href="?page={{ label.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                            {% endif %}
+                            {% for i in label.page_range %}
+                                {% if not i %}
+                                    <li><a href="">...</a></li>
+                                {% else %}
+                                    {% if label.number == i %}
+                                        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+                                    {% else %}
+                                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if label.has_next %}
+                                <li><a href="?page={{ label.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+    {% else %}
+        <p>There are no labels to show</p>
+    {% endif %}
+{% endblock %}

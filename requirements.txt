@@ -1,28 +1,42 @@
-pip-tools
-ipython
-ipdb
-flake8
-Django
-psycopg2
-raven
-WebTest
+## Django Specific Packages
 django-webtest
 model-mommy
 django-debug-toolbar
 django-model-utils
 django-redis
-hiredis
 django-bootstrap3
 django-vanilla-views
 django-extensions
 django-clear-cache
-uwsgi
+django-digg-paginator
+django-widget-tweaks
+django-mptt
+Django==1.11.3
+django_tables2
+django-filter
 django-configurations
+django-taggit
+elasticsearch_dsl
+gunicorn
+## Python Packages
 whitenoise
-# brotlipy
+django-haystack
 invoke
 pip-tools
 cookiecutter
-flake8
 pytest
 sh
+mutagen
+elasticsearch
+logstash
+requests
+pip-tools
+ipython
+ipdb
+flake8
+psycopg2
+raven
+WebTest
+# uwsgi
+# hiredis
+# brotlipy

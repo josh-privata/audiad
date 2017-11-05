@@ -1,12 +1,17 @@
 from os import environ, getenv
 from os.path import abspath, dirname, join
 from sys import argv
+import logging
+import logging.config
+from elasticsearch import Elasticsearch
 from configurations import Configuration
-
+import os
+import raven
+from elasticsearch import RequestsHttpConnection
 
 BASE_DIR = dirname(dirname(abspath(__file__)))
 PROJECT_NAME = 'audiad'
-PROJECT_ENVIRONMENT_SLUG = '{}_{}'.format(PROJECT_NAME, environ.get('DJANGO_CONFIGURATION').lower())
+PROJECT_ENVIRONMENT_SLUG = '{}_{}'.format(PROJECT_NAME, environ.get('DJANGO_CONFIGURATION'))
 
 # Detect if we are running tests.  Is this really the best way?
 IN_TESTS = 'test' in argv
@@ -16,18 +21,37 @@ class RedisCache(object):
     CACHES = {
         'default': {
             'BACKEND': 'django_redis.cache.RedisCache',
-            'LOCATION': 'redis://{}:{}/1'.format(getenv('REDIS_SERVICE_HOST', '127.0.0.1'), getenv('REDIS_SERVICE_PORT', 6379)),
-            'KEY_PREFIX': '{}_'.format(PROJECT_ENVIRONMENT_SLUG),
+            'LOCATION': 'redis://127.0.0.1:6379/1',
+            'KEY_PREFIX': 'audiad',
             'OPTIONS': {
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-                'PARSER_CLASS': 'redis.connection.HiredisParser',
                 # You may want this. See https://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
                 # 'IGNORE_EXCEPTIONS': True, # see
             }
         }
     }
-    SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-    SESSION_CACHE_ALIAS = 'default'
+    CACHE_TTL = 60 * 15
+
+
+class ElasticSearch(object):
+    ES_CLIENT = Elasticsearch(
+        ['http://127.0.0.1:9200/'], connection_class=RequestsHttpConnection)
+
+    ELASTICSEARCH_DSL = {
+        'default': {
+            'hosts': 'localhost:9200'
+        },
+    }
+
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'URL': 'http://127.0.0.1:9200/',
+            'INDEX_NAME': 'audiad',
+        },
+    }
+
+    HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 
 class Common(Configuration):
@@ -58,15 +82,17 @@ class Common(Configuration):
         'bootstrap3',
         'django_extensions',
         'clear_cache',
-        'audiad.album',
-        'audiad.artist',
-        'audiad.common',
-        'audiad.importer',
-        'audiad.search',
-        'audiad.song',
+        'django_tables2',
+        'taggit',
+        'django_filters',
+        'elasticsearch_dsl',
+        'widget_tweaks',
+        'mptt',
+        'music',
+
     ]
 
-    MIDDLEWARE = [
+    MIDDLEWARE_CLASSES = [
         'django.middleware.security.SecurityMiddleware',
         'whitenoise.middleware.WhiteNoiseMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
@@ -100,15 +126,6 @@ class Common(Configuration):
 
     WSGI_APPLICATION = 'audiad.wsgi.application'
 
-    # Database
-    # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-    # http://django-configurations.readthedocs.org/en/latest/values/#configurations.values.DatabaseURLValue
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
 
     # Password validation
     # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -146,9 +163,33 @@ class Common(Configuration):
 
     # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+    # DATABASES = {
+    #      'default': {
+    #          'ENGINE': 'django.db.backends.postgresql',
+    #          'NAME': 'django1',
+    #          'USER': 'postgres',
+    #          'PASSWORD': 'coffee',
+    #          'HOST': '192.168.2.10',
+    #          'PORT': '49162',
+    #      }
+    # }
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'mydatabase',
+        }
+    }
     FIXTURE_DIRS = [
         join(BASE_DIR, 'fixtures')
     ]
+
+    RAVEN_CONFIG = {
+        'dsn': 'https://1c89626d8e02478e972af34e31360744:616e20a1933c4eb4ae3943c6b41dc3c7@sentry.io/240094',
+        # If you are using git, you can also automatically configure the
+        # release based on the git info.
+        'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+    }
 
     LOGGING = {
         'version': 1,
@@ -160,10 +201,6 @@ class Common(Configuration):
         'formatters': {
             'verbose': {
                 'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-            },
-            'django.server': {
-                '()': 'django.utils.log.ServerFormatter',
-                'format': '[%(server_time)s] %(message)s',
             }
         },
         'handlers': {
@@ -179,7 +216,7 @@ class Common(Configuration):
             'django.server': {
                 'level': 'INFO',
                 'class': 'logging.StreamHandler',
-                'formatter': 'django.server',
+                'formatter': 'verbose',
             },
         },
         'loggers': {
@@ -206,8 +243,10 @@ class Common(Configuration):
         },
     }
 
+    LOGOUT_REDIRECT_URL = '/'
 
-class Dev(Common):
+
+class Dev(Common, RedisCache):
     DEBUG = True
     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
     EMAIL_FILE_PATH = '/tmp/app-emails'
