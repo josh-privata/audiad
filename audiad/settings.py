@@ -188,7 +188,6 @@ class Common(Configuration):
         'dsn': 'https://1c89626d8e02478e972af34e31360744:616e20a1933c4eb4ae3943c6b41dc3c7@sentry.io/240094',
         # If you are using git, you can also automatically configure the
         # release based on the git info.
-        'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
     }
 
     LOGGING = {
