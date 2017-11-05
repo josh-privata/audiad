@@ -27,16 +27,10 @@ __MACOSX/*
 bower_components/
 static_root/
 
-
-/.idea/
 /mydatabase
 /media/
-/music/__init__.pyc
-/music/__pycache__/
-/music/admin.pyc
-/music/apps.pyc
-/music/migrations/__pycache__/
-/music/models.pyc
 /.gitignore
-blog/__pycache__/
-blog/migrations/__pycache__/
+audiad/__pycache__/
+audiad/music/__pycache__/
+audiad/music/migrations/__pycache__/
+audiad/music/views/__pycache__/
