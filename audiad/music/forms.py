@@ -16,7 +16,7 @@ Todo:
 
 from django import forms
 from django.contrib.auth.models import User
-from .models import Album, Song, Artist, Genre, Label
+from audiad.music.models import Album, Song, Artist, Genre, Label
 
 
 class UserForm(forms.ModelForm):
@@ -59,7 +59,7 @@ class AlbumForm(forms.ModelForm):
     # todo Finish docstring
     class Meta:
         model = Album
-        fields = ['artist', 'title', 'subtitle', 'tags']
+        fields = ['artist', 'title', 'tags']
 
 
 class SongForm1(forms.ModelForm):
@@ -149,8 +149,7 @@ class SongForm2(forms.ModelForm):
     # todo Finish docstring
     class Meta:
         model = Song
-        fields = ('title', 'artist', 'album', 'track', 'fav', 'length',
-                  'last_played', 'tags')
+        fields = ('title', 'artist', 'album', 'tags')
 
 
 # class MP3Form(forms.ModelForm):

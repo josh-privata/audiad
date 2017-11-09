@@ -15,7 +15,7 @@ Todo:
 # todo Finish docstring
 
 import django_filters
-from .models import Album, Artist, Song, Genre, Label
+from audiad.music.models import Album, Artist, Song, Genre, Label
 
 
 class AlbumFilter(django_filters.FilterSet):

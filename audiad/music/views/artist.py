@@ -22,9 +22,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, FormView, DetailView, UpdateView, DeleteView, CreateView, View
 from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
-from music.tables import ArtistTable as AT
-from music.forms import ArtistForm
-from music.models import Album, Artist, Song
+from audiad.music.tables import ArtistTable as AT
+from audiad.music.forms import ArtistForm
+from audiad.music.models import Album, Artist, Song
 
 
 class Artists(View):

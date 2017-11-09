@@ -19,9 +19,9 @@ from django.contrib.auth import logout
 from django.db.models import Q
 from django.shortcuts import render, render_to_response
 from django.views.generic import TemplateView, ListView
-from music.filters import AlbumFilter, ArtistFilter, SongFilter, GenreFilter, LabelFilter
-from music.forms import UserForm
-from music.tables import *
+from audiad.music.filters import AlbumFilter, ArtistFilter, SongFilter, GenreFilter, LabelFilter
+from audiad.music.forms import UserForm
+from audiad.music.tables import *
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.shortcuts import render

@@ -22,9 +22,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, FormView, DetailView, UpdateView, DeleteView, CreateView, View
 from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
-from music.models import Label
-from music.tables import LabelTable as LT
-from music.forms import LabelForm
+from audiad.music.models import Label
+from audiad.music.tables import LabelTable as LT
+from audiad.music.forms import LabelForm
 
 
 class Labels(View):

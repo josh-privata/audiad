@@ -22,9 +22,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, FormView, DetailView, UpdateView, DeleteView, CreateView, View
 from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
-from music.models import Genre, Song
-from music.tables import GenreTable as GT
-from music.forms import GenreForm
+from audiad.music.models import Genre, Song
+from audiad.music.tables import GenreTable as GT
+from audiad.music.forms import GenreForm
 
 
 class Genres(View):

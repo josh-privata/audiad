@@ -59,6 +59,8 @@ class Common(Configuration):
         ('Josh Cannons', 'josh.cannons@gmail.com'),
     )
 
+    SITE_ID = 1
+
     MANAGERS = ADMINS
 
     # SECURITY WARNING: keep the secret key used in production secret!
@@ -75,6 +77,7 @@ class Common(Configuration):
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.messages',
+        'django.contrib.sites',
         'whitenoise.runserver_nostatic',
         'django.contrib.staticfiles',
         'raven.contrib.django.raven_compat',
@@ -88,7 +91,7 @@ class Common(Configuration):
         'elasticsearch_dsl',
         'widget_tweaks',
         'mptt',
-        'music',
+        'audiad.music',
 
     ]
 

@@ -7,7 +7,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html')),
-    url(r'^music/', include('music.urls', namespace='music')),
+    url(r'^music/', include('audiad.music.urls', namespace='music')),
     url(r'^admin/', include(admin.site.urls)),
 ]
 

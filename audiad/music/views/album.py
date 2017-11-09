@@ -23,9 +23,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, FormView, DetailView, UpdateView, DeleteView, CreateView, View
 from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
-from music.forms import AlbumForm
-from music.models import Album, Artist, Song
-from music.tables import AlbumTable as AT
+from audiad.music.forms import AlbumForm
+from audiad.music.models import Album, Artist, Song
+from audiad.music.tables import AlbumTable as AT
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.shortcuts import render

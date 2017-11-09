@@ -15,7 +15,7 @@ Todo:
 # todo Finish docstring
 
 import django_tables2 as tables
-from music.models import *
+from audiad.music.models import *
 
 
 class SongTable(tables.Table):

@@ -1,15 +1,14 @@
 from django.conf.urls import url, include
 from django.conf import settings
 from django.conf.urls.static import static
-import music.views.genre
-from music.views.views import *
-from music.views.album import *
-from music.views.song import *
-from music.views.artist import *
-from music.views.label import *
-from music.views.genre import *
-from music.views.views import IndexView
-from .views import views, song, album, artist, label, genre
+import audiad.music.views.genre
+from audiad.music.views.album import *
+from audiad.music.views.song import *
+from audiad.music.views.artist import *
+from audiad.music.views.label import *
+from audiad.music.views.genre import *
+from audiad.music.views.views import IndexView
+from audiad.music.views import views, song, album, artist, label, genre
 
 app_name = 'music'
 

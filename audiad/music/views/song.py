@@ -15,7 +15,7 @@ Todo:
 # todo Finish docstring
 from django.core.urlresolvers import reverse_lazy
 
-from music.forms import SongForm1
+from audiad.music.forms import SongForm1
 from digg_paginator import DiggPaginator as Paginator
 from django.core.paginator import PageNotAnInteger, EmptyPage
 from django.db.models import Q, F
@@ -23,9 +23,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, FormView, DetailView, UpdateView, DeleteView, CreateView, View
 from django_tables2 import RequestConfig
 from django_tables2.export import TableExport
-from music.forms import SongForm2, SongForm1
-from music.models import Album, Artist, Song
-from music.tables import SongTable as ST
+from audiad.music.forms import SongForm2, SongForm1
+from audiad.music.models import Album, Artist, Song
+from audiad.music.tables import SongTable as ST
 
 
 class Songs(View):
