@@ -8,8 +8,9 @@ env:
 # - DJANGO="x.y.z"
   - DJANGO_SETTINGS_MODULE="audiad.settings"
   - MOZ_HEADLESS=1
-addons:
-  firefox: latest
+
+#addons:
+#  firefox: latest
 
 #commands to install dependencies
 install:
@@ -21,5 +22,7 @@ before_script:
 
 #command to run the test suite
 script:
-  - python3 manage.py test audiad.music --settings=audiad.settings --configuration=Dev
+  - coverage run manage.py test audiad.music --settings=audiad.settings --configuration=Dev
 
+after_success:
+  coverage report
