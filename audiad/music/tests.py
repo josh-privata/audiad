@@ -23,7 +23,8 @@ from audiad.music.models import *
 from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+# from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.firefox.webdriver import FirefoxRemoteConnection as webdriver
 # from selenium.webdriver.chrome import webdriver as chromedriver
 from selenium.webdriver.firefox.options import Options
 
@@ -32,11 +33,11 @@ class GenreSeleniumTest(LiveServerTestCase):
 
     def setUp(self):
         """ setUp is where you instantiate the selenium webdriver and loads the browser. """
-        # User.objects.create_superuser(
-        #     username='josh',
-        #     password='josh',
-        #     email='josh@example.com'
-        # )
+        User.objects.create_superuser(
+            username='josh',
+            password='josh',
+            email='josh@example.com'
+        )
         options = Options()
         options.add_argument('-headless')
         self.selenium = webdriver.Firefox(firefox_options=options)
