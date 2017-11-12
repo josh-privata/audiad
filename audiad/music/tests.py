@@ -9,7 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 # from selenium.webdriver.chrome import webdriver as chromedriver
-
+from selenium.webdriver.firefox.options import Options
 
 class GenreSeleniumTest(LiveServerTestCase):
 
@@ -21,7 +21,7 @@ class GenreSeleniumTest(LiveServerTestCase):
             email='josh@example.com'
         )
         binary = FirefoxBinary('/usr/bin/firefox')
-        self.selenium = webdriver.Firefox(firefox_binary=binary)
+        self.selenium = webdriver.Firefox(firefox_binary=binary, firefox_options=headless)
         self.selenium.maximize_window()
         super(GenreSeleniumTest, self).setUp()
 

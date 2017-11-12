@@ -7,6 +7,9 @@ env:
   global:
 # - DJANGO="x.y.z"
   - DJANGO_SETTINGS_MODULE="audiad.settings"
+  - MOZ_HEADLESS=1
+addons:
+  firefox: latest
 
 #commands to install dependencies
 install:
