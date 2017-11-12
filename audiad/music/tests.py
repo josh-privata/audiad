@@ -99,13 +99,13 @@ class GenreWebTest(WebTest, TestCase):
         response = self.app.get(reverse('music:create_genre'))
         self.assertEqual(response.status_code, 200)
 
-    # def test_detail_view(self):
-    #     """
-    #     Test that we can view an instance via the detail view.
-    #     """
-    #     instance = mommy.make(Genre)
-    #     response = self.app.get(reverse('music:create_genre'))
-    #     self.assertEqual(response.status_code, 200)
+    def test_detail_view(self):
+        """
+        Test that we can view an instance via the detail view.
+        """
+        instance = mommy.make(Genre)
+        response = self.app.get(reverse('music:create_genre'))
+        self.assertEqual(response.status_code, 200)
 
     def test_update_view(self):
         """
@@ -116,16 +116,16 @@ class GenreWebTest(WebTest, TestCase):
         print(instance.pk)
         self.assertEqual(response.status_code, 200)
 
-    def test_delete_view(self):
-        """
-        Test that we can delete an instance via the delete view.
-        """
-        instance = mommy.make(Genre)
-        url = '/music/delete/genres/'
-        url.join(str(instance.pk))
-        # response1 = self.app.get(reverse('music:delete_genre', kwargs={'pk': '1', }))
-        print(instance.pk)
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        # self.assertEqual(response1.status_code, 200)
+    # def test_delete_view(self):
+    #     """
+    #     Test that we can delete an instance via the delete view.
+    #     """
+    #     instance = mommy.make(Genre)
+    #     url = '/music/delete/genres/'
+    #     url.join(str(instance.pk))
+    #     # response1 = self.app.get(reverse('music:delete_genre', kwargs={'pk': '1', }))
+    #     print(instance.pk)
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, 200)
+    #     # self.assertEqual(response1.status_code, 200)
 
