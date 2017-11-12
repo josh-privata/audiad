@@ -25,5 +25,6 @@ script:
   - coverage run manage.py test audiad.music --settings=audiad.settings --configuration=Dev
 
 after_success:
-  coverage report
-  coveralls
+  - coverage report
+  # https://coveralls.io/github/josh-privata/audiad
+  - coveralls
