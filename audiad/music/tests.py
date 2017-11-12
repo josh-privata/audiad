@@ -29,45 +29,46 @@ from selenium.webdriver.firefox.webdriver import FirefoxRemoteConnection as webd
 from selenium.webdriver.firefox.options import Options
 
 
-class GenreSeleniumTest(LiveServerTestCase):
-
-    def setUp(self):
-        """ setUp is where you instantiate the selenium webdriver and loads the browser. """
-        User.objects.create_superuser(
-            username='josh',
-            password='josh',
-            email='josh@example.com'
-        )
-        options = Options()
-        options.add_argument('-headless')
-        self.selenium = webdriver.Firefox(firefox_options=options)
-        # self.selenium.maximize_window()
-        super(GenreSeleniumTest, self).setUp()
-
-    def tearDown(self):
-        self.selenium.quit()
-        super(GenreSeleniumTest, self).tearDown()
-
-    def test_register(self):
-        selenium = self.selenium
-        # Opening the link we want to test
-        selenium.get('http://127.0.0.1:8000/music/register/')
-        # Find the form element
-        username = selenium.find_element_by_name('username')
-        email = selenium.find_element_by_name('email')
-        password = selenium.find_element_by_name('password')
-        submit = selenium.find_elements_by_id('submit')
-        # Fill the form with data
-        username.send_keys('quaser')
-        email.send_keys('q@q.com')
-        password.send_keys('123456')
-        # Submitting the form
-        submit[0].click()
-        # Check the returned result
-        assert 'Welcome quaser' in selenium.page_source
+# class GenreSeleniumTest(LiveServerTestCase):
+#
+#     def setUp(self):
+#         """ setUp is where you instantiate the selenium webdriver and loads the browser. """
+#         User.objects.create_superuser(
+#             username='josh',
+#             password='josh',
+#             email='josh@example.com'
+#         )
+#         options = Options()
+#         options.add_argument('-headless')
+#         self.selenium = webdriver.Firefox(firefox_options=options)
+#         # self.selenium.maximize_window()
+#         super(GenreSeleniumTest, self).setUp()
+#
+#     def tearDown(self):
+#         self.selenium.quit()
+#         super(GenreSeleniumTest, self).tearDown()
+#
+#     def test_register(self):
+#         selenium = self.selenium
+#         # Opening the link we want to test
+#         selenium.get('http://127.0.0.1:8000/music/register/')
+#         # Find the form element
+#         username = selenium.find_element_by_name('username')
+#         email = selenium.find_element_by_name('email')
+#         password = selenium.find_element_by_name('password')
+#         submit = selenium.find_elements_by_id('submit')
+#         # Fill the form with data
+#         username.send_keys('quaser')
+#         email.send_keys('q@q.com')
+#         password.send_keys('123456')
+#         # Submitting the form
+#         submit[0].click()
+#         # Check the returned result
+#         assert 'Welcome quaser' in selenium.page_source
 
 
 class GenreWebTest(WebTest, TestCase):
+
     def test_factory_create(self):
         """
         Test that we can create an instance via our object factory.
@@ -90,7 +91,7 @@ class GenreWebTest(WebTest, TestCase):
         """
         response = self.app.get(reverse('music:genre_list'))
         self.assertEqual(response.status_code, 200)
-    #
+
     def test_create_view(self):
         """
         Test that we can create an instance via the create view.
@@ -98,13 +99,13 @@ class GenreWebTest(WebTest, TestCase):
         response = self.app.get(reverse('music:create_genre'))
         self.assertEqual(response.status_code, 200)
 
-    def test_detail_view(self):
-        """
-        Test that we can view an instance via the detail view.
-        """
-        instance = mommy.make(Genre)
-        response = self.app.get(reverse('music:create_genre'))
-        self.assertEqual(response.status_code, 200)
+    # def test_detail_view(self):
+    #     """
+    #     Test that we can view an instance via the detail view.
+    #     """
+    #     instance = mommy.make(Genre)
+    #     response = self.app.get(reverse('music:create_genre'))
+    #     self.assertEqual(response.status_code, 200)
 
     def test_update_view(self):
         """
@@ -114,7 +115,6 @@ class GenreWebTest(WebTest, TestCase):
         response = self.app.get(reverse('music:edit_genre', kwargs={'pk': instance.pk, }))
         print(instance.pk)
         self.assertEqual(response.status_code, 200)
-
 
     def test_delete_view(self):
         """
