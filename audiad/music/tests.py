@@ -1,15 +1,32 @@
-from unittest import TestCase
+"""docstrings.
 
+
+Example:
+
+#
+# Attributes:
+#     module_level_variable1 (int): Module level variables may be documented in
+#         either the ``Attributes`` section of the module docstring, or in an
+#         inline docstring immediately following the variable.
+#
+# Todo:
+#
+# """
+# todo Finish docstring
+
+
+from unittest import TestCase
 from django.core.urlresolvers import reverse
 from django_webtest import WebTest
 from model_mommy import mommy
 from audiad.music.models import *
 from django.test import LiveServerTestCase
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 # from selenium.webdriver.chrome import webdriver as chromedriver
 from selenium.webdriver.firefox.options import Options
+
 
 class GenreSeleniumTest(LiveServerTestCase):
 
@@ -21,7 +38,7 @@ class GenreSeleniumTest(LiveServerTestCase):
             email='josh@example.com'
         )
         binary = FirefoxBinary('/usr/bin/firefox')
-        self.selenium = webdriver.Firefox(firefox_binary=binary, firefox_options=headless)
+        self.selenium = webdriver.Firefox(firefox_binary=binary, firefox_options='-headless')
         self.selenium.maximize_window()
         super(GenreSeleniumTest, self).setUp()
 
@@ -110,28 +127,6 @@ class GenreWebTest(WebTest, TestCase):
         self.assertEqual(response.status_code, 200)
         # self.assertEqual(response1.status_code, 200)
 
-
-# """docstrings.
-#
-#
-# Example:
-#
-# #
-# # Attributes:
-# #     module_level_variable1 (int): Module level variables may be documented in
-# #         either the ``Attributes`` section of the module docstring, or in an
-# #         inline docstring immediately following the variable.
-# #
-# # Todo:
-# #
-# # """
-# # # todo Finish docstring
-#
-# from django.core.urlresolvers import reverse
-# from django_webtest import WebTest
-# from model_mommy import mommy
-# from .models import Album, Artist, Song, Genre, Label, Country, Style
-#
 #
 # class GenreTest(WebTest):
 #     def test_factory_create(self):
