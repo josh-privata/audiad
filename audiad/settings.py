@@ -183,6 +183,7 @@ class Common(Configuration):
             'NAME': 'mydatabase',
         }
     }
+
     FIXTURE_DIRS = [
         join(BASE_DIR, 'fixtures')
     ]

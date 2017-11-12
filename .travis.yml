@@ -3,12 +3,23 @@ language: python
 python:
   - "3.4"
 
+env:
+  global:
+# - DJANGO="x.y.z"
+  - DJANGO_SETTINGS_MODULE="audiad.settings"
+  - PYTHONPATH="/home/josh/Code/Django/Projects/Audiad"
+  - PIP_USE_MIRRORS=true
+
 #commands to install dependencies
 install:
   - pip install -q Django==1.11
   - pip install -q -r requirements.txt
+  - pip install psycopg2 --quiet
 
+before_script:
+  - python manage.py syncdb --noinput
 
 #command to run the test suite
 script:
-  - python manage.py test
+  - python3 manage.py test audiad.music --settings=audiad.settings --configuration=Dev
+
