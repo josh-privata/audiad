@@ -19,7 +19,7 @@ django-taggit
 elasticsearch_dsl
 gunicorn
 ## Python Packages
-# whitenoise
+whitenoise
 django-haystack
 invoke
 pip-tools
