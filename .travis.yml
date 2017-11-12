@@ -7,8 +7,6 @@ env:
   global:
 # - DJANGO="x.y.z"
   - DJANGO_SETTINGS_MODULE="audiad.settings"
-  - PYTHONPATH="/home/josh/Code/Django/Projects/Audiad"
-  - PIP_USE_MIRRORS=true
 
 #commands to install dependencies
 install:
