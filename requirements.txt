@@ -35,6 +35,7 @@ ipython
 ipdb
 flake8
 psycopg2
+tablib
 raven
 WebTest
 coverage
