@@ -33,6 +33,7 @@ MEDIA_FORMATS = ('mp3', 'aac', 'alac', 'ogg', 'opus', 'flac', 'ape', 'wv', 'mpc'
 REMOVE = {'(', ')'}
 
 USER = 1
+# todo use mutagen to detect file type to avoid mpeg header error on wrongly named files
 
 # DB Formatting
 def replace(any_dict):
@@ -162,25 +163,46 @@ class Item:
         return self.path
 
     def genre(self):
-        return self.item.genre
+        if self.item.genre is not None:
+            return self.item.genre
+        else:
+            return "<unknown>"
 
     def country(self):
-        return self.item.country
+        if self.item.country:
+            return self.item.country
+        else:
+            return "<unknown>"
 
     def style(self):
-        return self.item.genre
+        if self.item.genre:
+            return self.item.genre
+        else:
+            return "<unknown>"
 
     def song(self):
-        return self.item.title
+        if self.item.title:
+            return self.item.title
+        else:
+            return "<unknown>"
 
     def artist(self):
-        return self.item.artist
+        if self.item.artist:
+            return self.item.artist
+        else:
+            return "<unknown>"
 
     def album(self):
-        return self.item.album
+        if self.item.album:
+            return self.item.album
+        else:
+            return "<unknown>"
 
     def label(self):
-        return self.item.label
+        if self.item.label is not None:
+            return self.item.label
+        else:
+            return "<unknown>"
 
     def get_song(self):
         return {'path': self.item.path,
@@ -367,15 +389,15 @@ def add_genre(con, name=None, **kwargs):
                   slugify(name)))
 
 
-def add_artist(con, genre=None, countrys=None, artist=None, style=None, **kwargs):
+def add_artist(con, genres=None, countrys=None, artist=None, styles=None, **kwargs):
     curs = con.cursor()
     curs.execute("""PRAGMA foreign_keys=ON""")
     country_id = curs.execute("""SELECT id FROM music_country WHERE music_country.name = ?""", (countrys,)).fetchone()
-    genre_id = curs.execute("""SELECT id FROM music_genre WHERE music_genre.name = ?""", (genre,)).fetchone()
-    style_id = curs.execute("""SELECT id FROM music_style WHERE music_style.name = ?""", (style,)).fetchone()
-    print(genre, genre_id)
+    genre_id = curs.execute("""SELECT id FROM music_genre WHERE music_genre.name = ?""", (genres,)).fetchone()
+    style_id = curs.execute("""SELECT id FROM music_style WHERE music_style.name = ?""", (styles,)).fetchone()
+    print(genres, genre_id)
     print(countrys, country_id)
-    print(style, style_id)
+    print(styles, style_id)
     curs.execute("""INSERT INTO music_artist
                  (name, country_id, realname,
                   musicbrainz_artistid,
@@ -408,18 +430,18 @@ def add_artist(con, genre=None, countrys=None, artist=None, style=None, **kwargs
                  (int(artist_id), int(style_id[0])))
 
 
-def add_album(con, countrys=None, genre=None, label=None, artist=None, album=None, style=None, **kwargs):
+def add_album(con, countrys=None, genres=None, labels=None, artist=None, album=None, styles=None, **kwargs):
     curs = con.cursor()
     curs.execute("""PRAGMA foreign_keys=ON""")
-    genre_id = curs.execute("""SELECT id FROM music_genre WHERE music_genre.name = ?""", (genre,)).fetchone()
+    genre_id = curs.execute("""SELECT id FROM music_genre WHERE music_genre.name = ?""", (genres,)).fetchone()
     artist_id = curs.execute("""SELECT id FROM music_artist WHERE music_artist.name = ?""", (artist,)).fetchone()
-    label_id = curs.execute("""SELECT id FROM music_label WHERE music_label.name = ?""", (label,)).fetchone()
+    label_id = curs.execute("""SELECT id FROM music_label WHERE music_label.name = ?""", (labels,)).fetchone()
     country_id = curs.execute("""SELECT id FROM music_country WHERE music_country.name = ?""", (countrys,)).fetchone()
-    style_id = curs.execute("""SELECT id FROM music_style WHERE music_style.name = ?""", (style,)).fetchone()
-    print(genre, genre_id)
+    style_id = curs.execute("""SELECT id FROM music_style WHERE music_style.name = ?""", (styles,)).fetchone()
+    print(genres, genre_id)
     print(artist, artist_id)
-    print(label, label_id)
-    print(style, style_id)
+    print(labels, label_id)
+    print(styles, style_id)
     print(countrys, country_id)
     print(album)
     curs.execute\
@@ -512,15 +534,15 @@ def add_album(con, countrys=None, genre=None, label=None, artist=None, album=Non
                  (int(album_id), int(style_id[0])))
 
 
-def add_song(con, filepath, genre=None, label=None, country=None, artist=None, album=None, song=None, style=None,  **kwargs):
+def add_song(con, filepath, genres=None, labels=None, countrys=None, artist=None, album=None, song=None, styles=None,  **kwargs):
     curs = con.cursor()
     curs.execute("""PRAGMA foreign_keys=ON""")
-    genre_id = curs.execute("""SELECT id FROM music_genre WHERE music_genre.name  = ?""", (genre,)).fetchone()
+    genre_id = curs.execute("""SELECT id FROM music_genre WHERE music_genre.name  = ?""", (genres,)).fetchone()
     artist_id = curs.execute("""SELECT id FROM music_artist WHERE music_artist.name  = ?""", (artist,)).fetchone()
     album_id = curs.execute("""SELECT id FROM music_album WHERE music_album.title = ?""", (album,)).fetchone()
-    label_id = curs.execute("""SELECT id FROM music_label WHERE music_label.name = ?""", (label,)).fetchone()
-    country_id = curs.execute("""SELECT id FROM music_country WHERE music_country.name = ?""", (country,)).fetchone()
-    style_id = curs.execute("""SELECT id FROM music_style WHERE music_style.name = ?""", (style,)).fetchone()
+    label_id = curs.execute("""SELECT id FROM music_label WHERE music_label.name = ?""", (labels,)).fetchone()
+    country_id = curs.execute("""SELECT id FROM music_country WHERE music_country.name = ?""", (countrys,)).fetchone()
+    style_id = curs.execute("""SELECT id FROM music_style WHERE music_style.name = ?""", (styles,)).fetchone()
     curs.execute\
     ("""INSERT INTO music_song(title, album_id, genre_id, artist_id, label_id, country_id,
     author,
@@ -800,11 +822,11 @@ def check_song(con, song="", artist="", album=""):
     album_id = curs.execute(
         """SELECT album_id FROM music_song WHERE music_song.title = ?""", (song,)).fetchone()
     if song_id:
-        ''' Lookup artist in db '''
-        if song_artist != check_artist(con, artist):
-            ''' Lookup album in db '''
-            if album_id != check_album(con, album, artist):
-                return song_id
+        # ''' Lookup artist in db '''
+        # if song_artist == check_artist(con, artist):
+        #     ''' Lookup album in db '''
+        #     if album_id == check_album(con, album, artist):
+        return song_id
     else:
         return None
 
@@ -865,72 +887,82 @@ def process_file(filepath):
     artist = item.artist()
     album = item.album()
     song = item.song()
+    ret = False
+    if artist is '<unknown>' or artist is None:
+        print('Artist Error')
+        ret = True
+    if album is '<unknown>' or None:
+        print('Artist Error')
+        ret = True
+    if song is '<unknown>' or None:
+        print('Song Error')
+        ret = True
+    if ret is False:
+        ''' checking Genre '''
+        temp_pk = check_genre(db, genre=genre)
+        if not temp_pk:
+            print(genre + ' - is not in the database. ADDING\n')
+            add_genre(db, name=genre)
+            db_save(db)
+            print('added ' + str(genre))
+        if temp_pk:
+            print(genre + ' - is already in the database. PASSING\n')
 
-    ''' checking Genre '''
-    temp_pk = check_genre(db, genre=genre)
-    if not temp_pk:
-        print(genre + ' - is not in the database. ADDING\n')
-        add_genre(db, name=genre)
-        db_save(db)
-        print('added ' + str(genre))
-    if temp_pk:
-        print(genre + ' - is already in the database. PASSING\n')
-        
-    ''' checking Style '''
-    temp_pk = check_style(db, style=style)
-    if not temp_pk:
-        print(style + ' - is not in the database. ADDING\n')
-        add_style(db, name=style)
-        db_save(db)
-        print('added ' + str(style))
-    if temp_pk:
-        print(style + ' - is already in the database. PASSING\n')
+        ''' checking Style '''
+        temp_pk = check_style(db, style=style)
+        if not temp_pk:
+            print(style + ' - is not in the database. ADDING\n')
+            add_style(db, name=style)
+            db_save(db)
+            print('added ' + str(style))
+        if temp_pk:
+            print(style + ' - is already in the database. PASSING\n')
 
-    ''' checking Country '''
-    temp_pk = check_country(db, country=country)
-    if not temp_pk:
-        print(country + ' - is not in the database. ADDING\n')
-        add_country(db, name=country)
-        db_save(db)
-    if temp_pk:
-        print(country + ' - is already in the database. PASSING\n')
+        ''' checking Country '''
+        temp_pk = check_country(db, country=country)
+        if not temp_pk:
+            print(country + ' - is not in the database. ADDING\n')
+            add_country(db, name=country)
+            db_save(db)
+        if temp_pk:
+            print(country + ' - is already in the database. PASSING\n')
 
-    ''' checking Label '''
-    temp_pk = check_label(db, label=label)
-    if not temp_pk:
-        print(label + ' - is not in the database. ADDING\n')
-        add_label(db, name=label)
-        db_save(db)
-    if temp_pk:
-        print(label + ' - is already in the database. PASSING\n')
+        ''' checking Label '''
+        temp_pk = check_label(db, label=label)
+        if not temp_pk:
+            print(label + ' - is not in the database. ADDING\n')
+            add_label(db, name=label)
+            db_save(db)
+        if temp_pk:
+            print(label + ' - is already in the database. PASSING\n')
 
-    ''' checking Artist '''
-    temp_pk = check_artist(db, artist=artist)
-    if not temp_pk:
-        print(artist + ' - is not in the database. ADDING\n')
-        print(item.get_artist())
-        add_artist(db, countrys=country, style=style, **item.get_artist())
-        db_save(db)
-    if temp_pk:
-        print(artist + ' - is already in the database. PASSING\n')
+        ''' checking Artist '''
+        temp_pk = check_artist(db, artist=artist)
+        if not temp_pk:
+            print(artist + ' - is not in the database. ADDING\n')
+            print(item.get_artist())
+            add_artist(db, countrys=country, genres=genre, styles=style, **item.get_artist())
+            db_save(db)
+        if temp_pk:
+            print(artist + ' - is already in the database. PASSING\n')
 
-    ''' checking Album '''
-    temp_pk = check_album(db, album=album, artist=artist)
-    if not temp_pk:
-        print(album + ' - is not in the database. ADDING\n')
-        add_album(db, style=style, artist=artist, countrys=country, **item.get_album())
-        db_save(db)
-    if temp_pk:
-        print(album + ' - is already in the database. PASSING\n')
+        ''' checking Album '''
+        temp_pk = check_album(db, album=album, artist=artist)
+        if not temp_pk:
+            print(album + ' - is not in the database. ADDING\n')
+            add_album(db, genres=genre, styles=style, artist=artist, labels=label, countrys=country, **item.get_album())
+            db_save(db)
+        if temp_pk:
+            print(album + ' - is already in the database. PASSING\n')
 
-    ''' checking Song '''
-    temp_pk = check_song(db, song=song, album=album, artist=artist)
-    if not temp_pk:
-        print(song + ' - is not in the database. ADDING\n')
-        add_song(db, filepath, style=style, song=song, **item.get_song())
-        db_save(db)
-    if temp_pk:
-        print(song + ' - is already in the database. PASSING\n')
+        ''' checking Song '''
+        temp_pk = check_song(db, song=song, album=album, artist=artist)
+        if not temp_pk:
+            print(song + ' - is not in the database. ADDING\n')
+            add_song(db, filepath, genres=genre, labels=label, countrys=country, styles=style, song=song, **item.get_song())
+            db_save(db)
+        if temp_pk:
+            print(song + ' - is already in the database. PASSING\n')
 
 
 if __name__ == '__main__':

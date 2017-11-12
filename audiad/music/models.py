@@ -1006,7 +1006,7 @@ class Album(models.Model):
     title = models.CharField(max_length=250, null=True, blank=True, default="")
     ''' Linked Fields '''
     user = models.ForeignKey(User, default=1)
-    genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING, blank=True, default=None)
+    genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING, blank=True, default=None, null=True)
     artist = models.ForeignKey(Artist, on_delete=models.DO_NOTHING, null=True, blank=True, default=None)
     style = models.ManyToManyField(Style, blank=True, default="")
     label = models.ForeignKey(Label, on_delete=models.DO_NOTHING, null=True, blank=True, default=None)

@@ -75,13 +75,13 @@ class Albums(View):
                 if user_albums:
                     if filter_by == 'favorites':
                         user_albums = user_albums.filter(fav=True)
-                paginate_albums = Paginator(user_albums, 20, body=3, margin=1, tail=1)
-                try:
-                    user_albums = paginate_albums.page(page)
-                except PageNotAnInteger:
-                    user_albums = paginate_albums.page(1)
-                except EmptyPage:
-                    user_albums = paginate_albums.page(paginate_albums.num_pages)
+            #     paginate_albums = Paginator(user_albums, 20, body=3, margin=1, tail=1)
+            #     try:
+            #         user_albums = paginate_albums.page(page)
+            #     except PageNotAnInteger:
+            #         user_albums = paginate_albums.page(1)
+            #     except EmptyPage:
+            #         user_albums = paginate_albums.page(paginate_albums.num_pages)
             except Album.DoesNotExist:
                 user_albums = []
             return render(request, 'music/album/albums.html', {

@@ -37,6 +37,8 @@ flake8
 psycopg2
 raven
 WebTest
+coverage
+selenium
 # uwsgi
 # hiredis
 # brotlipy
